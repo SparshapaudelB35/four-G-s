@@ -22,9 +22,10 @@
 }
 ul{
     display: flex;
-    gap: 90px;
+    gap: 70px;
     list-style:none;
-    margin-top: 15px;
+    margin-top: 18px;
+    margin-right: 50px;
 }
 ul li a{
     color:black;
@@ -40,7 +41,7 @@ ul li a:hover{
 .imagecontainer{
     display: flex;
     position: absolute;
-    margin-right: 1120px;
+    margin-right: 1110px;
     gap: 10px;
 }
 .imagecontainer img{
