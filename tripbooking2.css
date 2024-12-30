@@ -117,12 +117,23 @@ header .user img{
     height: 10%;
     border-radius: 50px;
 }
+.tripheading{
+    display: flex;
+    width: 90%;
+    margin-top: 100px;
+    margin: 68px;
+    justify-content: center;
+}
+.tripheading h{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    color: black;
+}
 .tripbooking{
     width: 90%;
-    height: 100%;
-    position: relative;
-    margin-left: 70px;
-    margin-top: 50px;
+    height: 60vh;
+    margin-top: 100px;
+    margin: 68px;
     border: 2px solid black;
     display: flex;
     justify-content: space-around;
@@ -132,41 +143,25 @@ header .user img{
 }
 .item1{
     padding: 140px;
-    background-color: aqua;
+    border: 2px solid black;
 }
 
 .item2{
     padding: 140px;
-    background-color:blue;
+    border: 2px solid black;
 }
 
 .item3{
     padding: 140px;
-    background-color: darkcyan;
+    border: 2px solid black;
 }
 
-.item4{
-    padding: 130px;
-    background-color: fuchsia;
-}
-.item5{
-    padding: 70px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 30px;
-    font-weight: bold;
-    
-}
-.item6{
-    padding: 130px;
-    background-color: rgb(255, 157, 0);
-}
 .hotelheading{
     display: flex;
     width: 90%;
     margin-top: 100px;
     margin: 68px;
     justify-content: center;
-    border: 2px solid black;
 }
 .hotelheading h{
     font-family: 'Courier New', Courier, monospace;
@@ -188,18 +183,15 @@ header .user img{
 .hotel1{
     padding: 150px;
     border: 2px solid black;
-    background-color: aqua;
     justify-content: space-around;
 }
 .hotel2{
     padding: 150px;
     border: 2px solid black;
-    background-color: rgb(255, 225, 0);
     justify-content: space-around;
 }
 .hotel3{
     padding: 150px;
     border: 2px solid black;
-    background-color: rgb(36, 199, 77);
     justify-content: space-around;
 }
