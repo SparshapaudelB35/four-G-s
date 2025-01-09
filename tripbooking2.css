@@ -16,12 +16,9 @@ header{
     z-index: 1000;
     display: flex;
     width:100%;
-    /* margin:30px; */
-    /* margin-top: 30px; */
     justify-content: flex-end;
     height: 80px;
     background-color: white;
-    /* border-radius: 20px; */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -194,4 +191,47 @@ header .user img{
     padding: 150px;
     border: 2px solid black;
     justify-content: space-around;
+}
+.row img{
+    height: 100px;
+    width: auto;
+    margin-top: 15px;
+}
+.footer{
+    background: #24262b;
+    border: 1px solid white;
+}
+.mainfooter{
+    max-width:1200px;
+    margin: 50px;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 120px;
+}
+.footer1 h1{
+    font-size: 30px;
+    color: aliceblue;
+}
+.footer2 h1{
+    font-size: 30px;
+    color: aliceblue;
+}
+.footer1 p1{
+    color: antiquewhite;
+}
+.footer2 p{
+    color: antiquewhite;
+}
+.copyright{
+    background: #24262b;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid white;
+
+}
+.copyright p{
+    color: aliceblue;
 }
