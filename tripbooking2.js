@@ -6,3 +6,23 @@ window.addEventListener("scroll", function() {
         header.classList.remove("scrolled");
     }
 });
+
+document.getElementById('aboutus-link').addEventListener('click',function(event){
+    event.preventDefault();
+    document.getElementById('aboutus').scrollIntoView({
+        behavior:'smooth'
+    });
+});
+
+document.getElementById('footer-link').addEventListener('click',function(event){
+    event.preventDefault();
+    document.getElementById('footer').scrollIntoView({
+        behavior:'smooth'
+    });
+});
+
+
+
+
+
+

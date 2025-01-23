@@ -3,6 +3,7 @@ html , body{
     margin: 0;
     padding: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth
 }
 .Container{
     width: 100%;
@@ -124,6 +125,10 @@ header .user img{
 .main:hover img{
     animation: Zoomimage 0.3s forwards ease-in-out;
 }
+
+
+
+
 
 
 
@@ -293,11 +298,87 @@ header .user img{
     cursor: pointer;
   }
   
-  .bn3:hover {
+.bn3:hover {
     border: 0.16em solid white;
     color: white;
     background-color: black;
+}
+
+
+
+
+
+
+
+
+.TourBooking{
+    width: 90%;
+    height: 80vh;
+    margin-top: 130px;
+    margin: 68px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.tourbooking1 {
+    margin-left: 30px;
+}
+.tourbooking1 img{
+    height: 330px;
+    width: 330px;
+}
+.tourbooking2{
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    background-color: black;
+    color: white;
+
+}
+
+.input{
+    display: inline;
+    margin: 10px 50px;
+    padding: 10px;
+    width: 70%;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-align: center;
+}
+.inputdate{
+    padding: 10px;
+    margin: 20px;
+}
+
+.bn4 {
+    padding: 0.5em 4.7em;
+    margin: 1.3em 0.1em 0.1em 0;
+    border: 0.16em solid black;
+    background-color: white;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
   }
+  
+.bn4:hover {
+    border: 0.16em solid white;
+    color: white;
+    background-color: black;
+}
+
+
+
+
+
+
 
 
 
@@ -338,6 +419,13 @@ header .user img{
     border: 2px solid black;
 }
 
+
+
+
+
+
+
+
 .aboutus{
     width: 90%;
     height: 60vh;
@@ -362,6 +450,12 @@ header .user img{
 .about2 h1{
     color: black;
 }
+
+
+
+
+
+
 
 
 
@@ -404,7 +498,6 @@ header .user img{
     display: flex;
     justify-content: center;
     border: 1px solid white;
-
 }
 .copyright p{
     color: aliceblue;
