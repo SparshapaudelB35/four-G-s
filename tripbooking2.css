@@ -200,8 +200,6 @@ header .user img{
     animation: zoomImage 0.3s forwards ease-in-out;
 }
 
-
-
 .item2 {
     height: 400px;
     animation: none; 
@@ -240,8 +238,6 @@ header .user img{
 .item2:hover img {
     animation: zoomImage 0.3s forwards ease-in-out;
 }
-
-
 
 .item3 {
     height: 400px;
@@ -395,28 +391,230 @@ header .user img{
     color: black;
 }
 .hotelbooking{
-    width: 90%;
+    width: 93%;
     height: 70vh;
     margin-top: 100px;
-    margin: 68px;
-    border: 2px solid black;
+    margin: 40px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 40px;
     flex-wrap: wrap;
+    text-align: center;
 }
-.hotel1{
-    padding: 140px;
-    border: 2px solid black;
+.hotelbooking h1{
+    font-size: 23px;
 }
-.hotel2{
-    padding: 140px;
-    border: 2px solid black;
+.hotelbooking h2{
+    font-size: 17px;
 }
-.hotel3{
-    padding: 140px;
-    border: 2px solid black;
+.hotel1 {
+    height: 400px;
+    animation: none; 
+}
+
+.hotel1 img {
+    height: 280px;
+    width: 330px;
+    animation: none; 
+}
+
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes zoomImage {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+.hotel1:hover {
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.hotel1:hover img {
+    animation: zoomImage 0.3s forwards ease-in-out;
+}
+
+.hotel2 {
+    height: 400px;
+    animation: none; 
+}
+
+.hotel2 img {
+    height: 280px;
+    width: 330px;
+    animation: none; 
+}
+
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes zoomImage {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.hotel2:hover {
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.hotel2:hover img {
+    animation: zoomImage 0.3s forwards ease-in-out;
+}
+
+.hotel3 {
+    height: 400px;
+    animation: none; 
+}
+
+.hotel3 img {
+    height: 280px;
+    width: 330px;
+    animation: none; 
+}
+
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes zoomImage {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.hotel3:hover {
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.hotel3:hover img {
+    animation: zoomImage 0.3s forwards ease-in-out;
+}
+
+.bn4 {
+    padding: 0.5em 1.7em;
+    margin: 0 0.1em 0.1em 0;
+    border: 0.16em solid black;
+    background-color: white;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  
+.bn4:hover {
+    border: 0.16em solid white;
+    color: white;
+    background-color: black;
+}
+
+
+
+
+
+
+.HotelBooking{
+    width: 90%;
+    height: 80vh;
+    margin-top: 130px;
+    margin: 68px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.hotelbooking2 {
+    margin-left: 30px;
+}
+.hotelbooking2 img{
+    height: 370px;
+    width: 370px;
+}
+.hotelbooking1{
+    width: 500px;
+    height: 520px;
+    text-align: center;
+    background-color: black;
+    color: white;
+
+}
+
+.input{
+    display: inline;
+    margin: 10px 50px;
+    padding: 10px;
+    width: 70%;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-align: center;
+}
+.inputdate{
+    padding: 10px;
+    margin: 20px;
+}
+.hotelbooking1.check{
+    margin: 40px;
+}
+
+.bn4 {
+    padding: 0.5em 4.7em;
+    margin: 1.3em 0.1em 0.1em 0;
+    border: 0.16em solid black;
+    background-color: white;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  
+.bn4:hover {
+    border: 0.16em solid white;
+    color: white;
+    background-color: black;
 }
 
 
@@ -428,7 +626,7 @@ header .user img{
 
 .aboutus{
     width: 90%;
-    height: 60vh;
+    height: 80vh;
     margin-top: 130px;
     margin: 68px;
     display: flex;
@@ -452,6 +650,166 @@ header .user img{
 }
 
 
+
+
+
+.teamheading{
+    display: flex;
+    width: 90%;
+    margin-top: 100px;
+    margin: 68px;
+    justify-content: center;
+}
+.teamheading h{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    color: black;
+}
+.team{
+    width: 93%;
+    height: 70vh;
+    margin: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    text-align: center;
+    border: 2px solid black;
+    position: relative;
+    background: #24262b;
+}
+.person1{
+    width: 220px;
+    height: 250px;  
+}
+.person1 img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.person1 h1{
+    color: white;
+    font-size: 25px;
+
+}
+.person1 h2{
+    color: white;
+    font-size: 17px;
+}
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+.person1:hover{
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.person2{
+    width: 220px;
+    height: 250px;   
+}
+.person2 img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.person2 h1{
+    color: white;
+    font-size: 25px;
+
+}
+.person2 h2{
+    color: white;
+    font-size: 17px;
+}
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+.person2:hover{
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.person3{
+    width: 220px;
+    height: 250px; 
+}
+.person3 img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.person3 h1{
+    color: white;
+    font-size: 21.6px;
+
+}
+.person3 h2{
+    color: white;
+    font-size: 17px;
+}
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+.person3:hover{
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.person4{
+    width: 220px;
+    height: 250px;
+}
+.person4 img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.person4 h1{
+    color: white;
+    font-size: 21.6px;
+
+}
+.person4 h2{
+    color: white;
+    font-size: 17px;
+}
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+.person4:hover{
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
 
 
 
