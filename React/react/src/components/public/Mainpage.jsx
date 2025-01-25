@@ -3,16 +3,8 @@ import '../css/Mainpage.css'
 import { Link } from 'react-router-dom';
 
 function Mainpage(){
-    const containerStyle = {
-        width: "100%",
-        height: "100vh",
-        backgroundImage: "url('/Image/tour3.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      };
     return(
-        <div style={containerStyle}>
+        <div className="Container">
         <div className="Header">
           <div className="imagecontainer">
             <img src="/Image/logo3.png" alt="logo" />
