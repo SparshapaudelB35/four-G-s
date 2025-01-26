@@ -1,16 +1,17 @@
-const { Sequelize, Sequelize } = require("sequelize")
+const { Sequelize } = require("sequelize")
 
-const Sequelize = new Sequelize("postgres","postgres","postgres",{
+const sequelize = new Sequelize("postgres","postgres","saranghae",{
     host : "localhost",
     dialect : "postgres",
 });
 
 const connection = async () => {
     try{
-        await Sequelize.authenticate();
+        await sequelize.authenticate();
         console.log("Connection has been established successfully.");
     }catch(error){
         console.error("Unable to connect to the database",error);
+        console.error("Error details:", error.message); 
     }
 };
 
