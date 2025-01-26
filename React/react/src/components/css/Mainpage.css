@@ -6,25 +6,29 @@
 }
 .Container{
     width: 100%;
-    height: 100vh;
-    background-image:url(/Image/tour3.jpg);
-    background-size: cover;
-    background-position: center;    
+    height: 100vh; 
 }
+.Container img {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    filter: brightness(0.7);      
+
+} 
 .Header{
     position: fixed;
     display: flex;
     width:96%;
-    margin: 18px;
     margin-top: 30px;
-
     justify-content: flex-end;
 }
 
 .imagecontainer{
     display: flex;
     position: absolute;
-    margin-right: 1110px;
+    margin-right: 1160px;
     gap: 10px;
     cursor: pointer;
 }
@@ -32,10 +36,14 @@
     height: 80px;
     width: auto;
 }
-.user img{
+.user img {
+    margin-top: 15px;
+    margin-right: 40px;
+    height: 50px;
+    width: auto;
     cursor: pointer;
+    right: 1px;
 }
-
 .Information{
     width: 100%;
     position:absolute;

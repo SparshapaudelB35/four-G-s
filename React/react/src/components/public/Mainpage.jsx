@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 function Mainpage(){
     return(
         <div className="Container">
+          <img src='/Image/tour3.jpg'></img>
         <div className="Header">
           <div className="imagecontainer">
             <img src="/Image/logo3.png" alt="logo" />
