@@ -1,0 +1,874 @@
+html , body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth
+}
+.Main{
+    background:white;
+    color: black;
+}
+.Container{
+    width: 100%;
+    height: 100vh;
+    background-image:url(./Image/tour3.jpg);
+    background-size: cover;
+    background-position: center; 
+    filter: brightness(0.9);   
+     
+}
+header{
+    z-index: 1000;
+    display: flex;
+    width:100%;
+    justify-content: flex-end;
+    height: 80px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+header.scrolled {
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+}
+
+header{
+    position: sticky;
+    top: 0;
+}
+
+header ul{
+    display: flex;
+    gap: 70px;
+    list-style:none;
+    margin-right: 55px;
+    margin-top: 30px;
+}
+header ul li a{
+    color:black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+ul li a:hover{
+    border-bottom: 2px solid black ;
+    color: black;
+}
+header .imagecontainer{
+    display: flex;
+    position: absolute;
+    margin-top: 2px;
+    margin-right: 1100px;
+    gap: 10px;
+}
+header .imagecontainer img{
+    
+    height: 75px;
+    width: auto;
+    cursor: pointer;
+}
+
+header .imagecontainer h{
+    margin-right: 400px;
+    color: white;
+    font-family:'Courier New', Courier, monospace;
+}
+header .user img{
+    margin-top: 17px;
+    margin-right: 30px;
+    height: 40px;
+    width: auto;
+    cursor: pointer;
+    transition: 0.6s;
+}
+.tripinformation{
+   position: relative;
+   margin-left: 50px;
+   top: 200px;
+}
+.tripinformation h1{
+    font-size: 50px;
+    color: white;
+    text-shadow: 0 0 10px rgb(60, 155, 155),
+    0 0 20px rgb(60, 155, 155),
+    0 0 40px rgb(60, 155, 155),
+    0 0 80px rgb(60, 155, 155);
+    font-family: 'Courier New', Courier, monospace;
+
+}
+.tripinformation h2{
+    font-size: 30px;
+    color: white;
+    text-shadow: 0 0 10px rgb(60, 155, 155),
+    0 0 20px rgb(60, 155, 155),
+    0 0 40px rgb(60, 155, 155),
+    0 0 80px rgb(60, 155, 155);
+    font-family: 'Courier New', Courier, monospace;
+}
+.main{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-left: 680px ;
+    top: 130px;
+}
+.main img {
+    width: 60%;
+    height: 10%;
+    border-radius: 50px;
+    animation: none;
+}
+@keyframes Zoomimage{
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(1.2);
+    }
+}
+.main:hover img{
+    animation: Zoomimage 0.3s forwards ease-in-out;
+}
+
+
+
+
+
+
+
+.tripheading{
+    display: flex;
+    width: 90%;
+    margin-top: 100px;
+    margin: 68px;
+    justify-content: center;
+}
+.tripheading h1{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    color: black;
+}
+.tripbooking{
+    width: 93%;
+    height: 70vh;
+    margin-top: 100px;
+    margin: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    text-align: center;
+    
+}
+.tripbooking h1{
+    font-size: 23px;
+}
+.tripbooking h2{
+    font-size: 17px;
+}
+.item1 {
+    height: 400px;
+    animation: none; 
+}
+
+.item1 img {
+    height: 280px;
+    width: 330px;
+    animation: none; 
+}
+
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes zoomImage {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+.item1:hover {
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.item1:hover img {
+    animation: zoomImage 0.3s forwards ease-in-out;
+}
+
+.item2 {
+    height: 400px;
+    animation: none; 
+}
+
+.item2 img {
+    height: 280px;
+    width: 330px;
+    animation: none; 
+}
+
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes zoomImage {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.item2:hover {
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.item2:hover img {
+    animation: zoomImage 0.3s forwards ease-in-out;
+}
+
+.item3 {
+    height: 400px;
+    animation: none; 
+}
+
+.item3 img {
+    height: 280px;
+    width: 330px;
+    animation: none; 
+}
+
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes zoomImage {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.item3:hover {
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.item3:hover img {
+    animation: zoomImage 0.3s forwards ease-in-out;
+}
+
+.bn3 {
+    padding: 0.5em 1.7em;
+    margin: 0 0.1em 0.1em 0;
+    border: 0.16em solid black;
+    background-color: white;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  
+.bn3:hover {
+    border: 0.16em solid white;
+    color: white;
+    background-color: black;
+}
+
+
+
+
+
+
+
+
+.TourBooking{
+    width: 90%;
+    height: 80vh;
+    margin-top: 130px;
+    margin: 68px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.tourbooking1 {
+    margin-left: 30px;
+}
+.tourbooking1 img{
+    height: 330px;
+    width: 330px;
+}
+.tourbooking2{
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    background-color: black;
+    color: white;
+    border: 2px solid rgb(255, 174, 0);
+
+}
+
+.input{
+    display: inline;
+    margin: 10px 50px;
+    padding: 10px;
+    width: 70%;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-align: center;
+}
+.inputdate{
+    padding: 10px;
+    margin: 20px;
+}
+
+.bn4 {
+    padding: 0.5em 4.7em;
+    margin: 1.3em 0.1em 0.1em 0;
+    border: 0.16em solid black;
+    background-color: white;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  
+.bn4:hover {
+    border: 0.16em solid white;
+    color: white;
+    background-color: black;
+}
+
+
+
+
+
+
+
+
+
+.hotelheading{
+    display: flex;
+    width: 90%;
+    margin-top: 100px;
+    margin: 68px;
+    justify-content: center;
+}
+.hotelheading h1{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    
+}
+.hotelbooking{
+    width: 93%;
+    height: 70vh;
+    margin-top: 100px;
+    margin: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.hotelbooking h1{
+    font-size: 23px;
+}
+.hotelbooking h2{
+    font-size: 17px;
+}
+.hotel1 {
+    height: 400px;
+    animation: none; 
+}
+
+.hotel1 img {
+    height: 280px;
+    width: 330px;
+    animation: none; 
+}
+
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes zoomImage {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+.hotel1:hover {
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.hotel1:hover img {
+    animation: zoomImage 0.3s forwards ease-in-out;
+}
+
+.hotel2 {
+    height: 400px;
+    animation: none; 
+}
+
+.hotel2 img {
+    height: 280px;
+    width: 330px;
+    animation: none; 
+}
+
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes zoomImage {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.hotel2:hover {
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.hotel2:hover img {
+    animation: zoomImage 0.3s forwards ease-in-out;
+}
+
+.hotel3 {
+    height: 400px;
+    animation: none; 
+}
+
+.hotel3 img {
+    height: 280px;
+    width: 330px;
+    animation: none; 
+}
+
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes zoomImage {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.hotel3:hover {
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.hotel3:hover img {
+    animation: zoomImage 0.3s forwards ease-in-out;
+}
+
+.bn4 {
+    padding: 0.5em 1.7em;
+    margin: 0 0.1em 0.1em 0;
+    border: 0.16em solid black;
+    background-color: white;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  
+.bn4:hover {
+    border: 0.16em solid white;
+    color: white;
+    background-color: black;
+}
+
+
+
+
+
+
+.HotelBooking{
+    width: 90%;
+    height: 80vh;
+    margin-top: 130px;
+    margin: 68px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.hotelbooking2 {
+    margin-left: 30px;
+}
+.hotelbooking2 img{
+    height: 370px;
+    width: 370px;
+}
+.hotelbooking1{
+    width: 500px;
+    height: 520px;
+    text-align: center;
+    background-color: black;
+    color: white;
+    border: 2px solid rgb(255, 174, 0);
+
+}
+
+.input{
+    display: inline;
+    margin: 10px 50px;
+    padding: 10px;
+    width: 72%;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-align: center;
+}
+.inputdate{
+    padding: 10px;
+    margin: 20px;
+}
+.hotelbooking1.check{
+    margin: 40px;
+}
+
+.bn4 {
+    padding: 0.5em 4.7em;
+    margin: 1.3em 0.1em 0.1em 0;
+    border: 0.16em solid black;
+    background-color: white;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  
+.bn4:hover {
+    border: 0.16em solid white;
+    color: white;
+    background-color: black;
+}
+
+
+
+
+
+
+
+
+.aboutus{
+    width: 90%;
+    height: 80vh;
+    margin-top: 130px;
+    margin: 68px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.about1 {
+    margin-left: 40px;
+}
+.about1 img{
+    height: 400px;
+    width: 400px;
+}
+.about2{
+    text-align: center;
+}
+.about2 h1{
+    color: black;
+    font-size: 35px;
+}
+.about2 p{
+    font-size: 13px;
+}
+
+
+
+
+.teamheading{
+    display: flex;
+    width: 90%;
+    margin-top: 100px;
+    margin: 68px;
+    justify-content: center;
+}
+.teamheading h1{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    color: black;
+}
+.team{
+    width: 93%;
+    height: 70vh;
+    margin: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    text-align: center;
+    border: 2px solid black;
+    position: relative;
+    background: #24262b;
+}
+.person1{
+    width: 220px;
+    height: 250px;  
+}
+.person1 img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.person1 h1{
+    color: white;
+    font-size: 25px;
+
+}
+.person1 h2{
+    color: white;
+    font-size: 17px;
+}
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+.person1:hover{
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.person2{
+    width: 220px;
+    height: 250px;   
+}
+.person2 img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.person2 h1{
+    color: white;
+    font-size: 25px;
+
+}
+.person2 h2{
+    color: white;
+    font-size: 17px;
+}
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+.person2:hover{
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.person3{
+    width: 220px;
+    height: 250px; 
+}
+.person3 img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.person3 h1{
+    color: white;
+    font-size: 21.6px;
+
+}
+.person3 h2{
+    color: white;
+    font-size: 17px;
+}
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+.person3:hover{
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+.person4{
+    width: 220px;
+    height: 250px;
+}
+.person4 img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.person4 h1{
+    color: white;
+    font-size: 21.6px;
+
+}
+.person4 h2{
+    color: white;
+    font-size: 17px;
+}
+@keyframes hoverAnimation {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+    }
+}
+.person4:hover{
+    animation: hoverAnimation 0.3s forwards ease-in-out;
+}
+
+
+
+
+
+
+
+
+.row img{
+    height: 100px;
+    width: auto;
+    margin-top: 15px;
+}
+.footer{
+    background: #24262b;
+    border: 1px solid white;
+}
+.mainfooter{
+    max-width:1200px;
+    margin: 50px;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 120px;
+}
+.footer1 h1{
+    font-size: 30px;
+    color: aliceblue;
+}
+.footer2 h1{
+    font-size: 30px;
+    color: aliceblue;
+}
+.footer1 p{
+    color: antiquewhite;
+    font-size: 15px;
+}
+.footer2 p{
+    color: antiquewhite;
+}
+.copyright{
+    background: #24262b;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid white;
+}
+.copyright p{
+    color: aliceblue;
+}
