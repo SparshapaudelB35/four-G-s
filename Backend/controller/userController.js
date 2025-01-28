@@ -3,7 +3,8 @@ const Users = require("../model/userSchema");
 const getAllCustomer = async (req, res) => {
   console.log("Get All Customer");
   try {
-    const users = await Users.findAll();
+    //fetching all the data from users table
+    const users = await users.findAll();
  
     if (users.length === 0) {
       res

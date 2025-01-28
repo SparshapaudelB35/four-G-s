@@ -1,6 +1,7 @@
 const express = require("express");
 const { connection } = require("./database/db");
 
+
 const {Users} = require("./model/userSchema.js");
 
 
@@ -8,6 +9,8 @@ const {Users} = require("./model/userSchema.js");
 const app = express();
 
 const PORT = 5000;
+
+app.use
 
 
 
