@@ -100,6 +100,9 @@ function Tripbooking() {
           <input type="date" id="from-date" className="inputdate" />
           <label htmlFor="to-date">To:</label>
           <input type="date" id="to-date" className="inputdate" />
+          <div className="Total">
+            <p>Total:</p>
+          </div>
           <button href="#" className="bn4">Book It</button>
         </div>
       </div>
@@ -115,7 +118,9 @@ function Tripbooking() {
           <input type="date" id="from-date" className="inputdate" />
           <label htmlFor="to-date">To:</label>
           <input type="date" id="to-date" className="inputdate" />
-          <br />
+          <div className="Total">
+            <p>Total:</p>
+          </div>
           <label className="check">
             <input type="checkbox" />
             Trip to here already booked?
