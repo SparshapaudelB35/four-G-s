@@ -41,7 +41,7 @@ header ul{
     display: flex;
     gap: 70px;
     list-style:none;
-    margin-right: 55px;
+    margin-right: 240px;
     margin-top: 30px;
 }
 header ul li a{
@@ -59,7 +59,7 @@ header .imagecontainer{
     display: flex;
     position: absolute;
     margin-top: 2px;
-    margin-right: 1100px;
+    margin-right: 1150px;
     gap: 10px;
 }
 header .imagecontainer img{

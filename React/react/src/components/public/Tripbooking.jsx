@@ -20,6 +20,9 @@ function Tripbooking() {
           <li>
             <a href="#aboutus" id="aboutus-link">About Us</a>
           </li>
+          <li>
+            <a href="#" id="mybookings">My Bookings</a>
+          </li>
         </ul>
         <div className="user">
           <img src="./Image/icons8-user-48.png" alt="user" />
