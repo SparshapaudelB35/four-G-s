@@ -10,16 +10,8 @@ function Signuppage() {
         <div className="imagecontainer">
           <img src="./Image/logo3.png" alt="logo" />
         </div>
-        <ul>
-          <li>
-            <Link to="/mainpage">Home</Link>
-          </li>
-          <li>
-            <Link to="#">About Us</Link>
-          </li>
-        </ul>
-        <div className="user">
-          <img src="./Image/icons8-user-48.png" alt="user" />
+        <div className="home">
+          <img src="/Image/home.jpg" alt="home" />
         </div>
       </div>
       <div className="Information">

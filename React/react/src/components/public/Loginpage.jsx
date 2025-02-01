@@ -10,16 +10,8 @@ function Loginpage() {
         <div className="imagecontainer">
           <img src="./Image/logo3.png" alt="logo" />
         </div>
-        <ul>
-          <li>
-            <a href="./mainpage.html">Home</a>
-          </li>
-          <li>
-            <a href="#">About Us</a>
-          </li>
-        </ul>
-        <div className="user">
-          <img src="./Image/icons8-user-48.png" alt="icon" />
+        <div className="home">
+          <img src="/Image/home.jpg" alt="home" />
         </div>
       </div>
       <div className="Information">

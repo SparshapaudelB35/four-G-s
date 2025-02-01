@@ -14,13 +14,13 @@ function App() {
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
       <Routes>
+        <Route path='/' element={<Mainpage/>} /> 
+        <Route path='/' element={<Loginpage/>} />
+        <Route path='/' element={<Signuppage/>}/>
+        <Route path='/' element={<Forgotpassword/>}/>
+        <Route path='/' element={<Tripbooking/>}/>
         <Route path='/' element={<TourCRUD/>}/>
-        {/* <Route path='/' element={<HotelCRUD/>}/> */}
-        {/* <Route path='/' element={<Tripbooking/>}/> */}
-        {/* <Route path='/' element={<Forgotpassword/>}/> */}
-        {/* <Route path='/' element={<Signuppage/>}/> */}
-        {/* <Route path='/' element={<Mainpage/>} />  */}
-        {/* <Route path='/' element={<Loginpage/>} /> */}
+        <Route path='/' element={<HotelCRUD/>}/>        
       </Routes>
       </Suspense>
     </Router>

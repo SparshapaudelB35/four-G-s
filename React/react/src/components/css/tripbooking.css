@@ -74,13 +74,14 @@ header .imagecontainer h{
     color: white;
     font-family:'Courier New', Courier, monospace;
 }
-header .user img{
+header .logout img{
     margin-top: 17px;
     margin-right: 30px;
     height: 40px;
     width: auto;
     cursor: pointer;
     transition: 0.6s;
+    border-radius: 50%;
 }
 .tripinformation{
    position: relative;

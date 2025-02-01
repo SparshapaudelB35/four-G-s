@@ -21,7 +21,7 @@ function Mainpage(){
             Explore now with the best touring company of Nepal to make your visit
             great and memorable.
           </p>
-          <button type="button">LOG IN</button>
+          <button type="button" onClick={() => navigate('/login')}>LOG IN</button>
           <button type="button">REGISTER</button>
         </div>
       </div>

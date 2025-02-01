@@ -24,8 +24,8 @@ function Tripbooking() {
             <a href="#" id="mybookings">My Bookings</a>
           </li>
         </ul>
-        <div className="user">
-          <img src="./Image/icons8-user-48.png" alt="user" />
+        <div className="logout">
+          <img src="/Image/logout.png" alt="logout" />
         </div>
       </header>
 

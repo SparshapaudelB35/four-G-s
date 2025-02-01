@@ -88,3 +88,7 @@ button{
     cursor: pointer;
     background-color: black;
 }
+button:hover{
+    border: 2px solid rgb(228, 192, 114);
+
+}
