@@ -1,18 +1,27 @@
-const { Sequelize } = require("sequelize")
+import { Sequelize } from 'sequelize'
+import dotenv from 'dotenv'
 
-const sequelize = new Sequelize("postgres","postgres","saranghae",{
-    host : "localhost",
-    dialect : "postgres",
-});
+dotenv.config();
 
-const connection = async () => {
-    try{
-        await sequelize.authenticate();
-        console.log("Connection has been established successfully.");
-    }catch(error){
-        console.error("Unable to connect to the database",error);
-        console.error("Error details:", error.message); 
-    }
-};
+export const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: 'postgres',// other example mysql,oracle,h2
+  }
+);
 
-module.exports = { sequelize, connection };
+export const db = () => {
+  try {
+    sequelize.sync({alter:true})
+    console.log("database connected successfully")
+
+  } catch (e) {
+    console.error("fail to connect database successfully",e)
+  }
+}
+
+
+

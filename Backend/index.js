@@ -1,28 +1,29 @@
 const express = require("express");
-const {connection} = require("./database/db.js")
+import bodyParser from "body-parser";
+const {connection, db} = require("./database/db.js")
+import {userRouter} from "./routes/index.js"
+import { authRouter } from "./routes/index.js";
+import dotenv from "dotenv";
+import {authenticateToken} from "./middleware/token-middleware.js"
+
+dotenv.config();
+
 
 const Users = require("./model/User/userSchema.js");
 const Tour = require("./model/Tour/tourSchema.js");
 const HotelBooking = require("./model/Hotel/hotelSchema.js");
 
 const app = express();
-const PORT = 5000;
 
 // Middleware to parse incoming JSON requests
+const port = process.env.PORT || 5000;
+app.use(bodyParser.json());
 app.use(express.json());
+app.use(authenticateToken);
+app.use("/api/users", userRouter);
+app.use("/api/auth", authRouter);
 
-// Establish database connections
-(async () => {
-  try {
-    await connection();
-    console.log("Connected to User Database");
-  } catch (error) {
-    console.error("Database connection error:", error.message);
-  }
-})();
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(4000, function(){
+  console.log("Project running in port");
+  db();
 });
-
-connection()
