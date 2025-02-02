@@ -1,7 +1,7 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("../../database/db.js");
+import { DataTypes } from "sequelize";
+import { sequelize } from "../../database/db.js";
 
-const HotelBooking = sequelize.define("hotelBooking", {
+export const HotelBooking = sequelize.define("hotelBooking", {
   bookingId:{
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -51,4 +51,4 @@ const HotelBooking = sequelize.define("hotelBooking", {
   }
 })();
 
-module.exports = HotelBooking;
+

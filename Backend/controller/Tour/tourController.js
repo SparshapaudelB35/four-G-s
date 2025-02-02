@@ -1,4 +1,4 @@
-const Tour = require("../../model/Tour/tourSchema.js");
+import {Tour} from '../../model/index.js';
 
 const getAllTours = async (req, res) => {
   console.log("Get All Tours");
@@ -99,7 +99,7 @@ const saveAllTour = async (req, res) => {
     }
   };
 
-module.exports = {
+export const tourController = {
   getAllTours,
   createTour,
   updateTour,

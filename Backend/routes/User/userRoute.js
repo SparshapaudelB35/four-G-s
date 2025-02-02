@@ -1,20 +1,13 @@
 import express from 'express';
-import {
-  getAllCustomer,
-  saveAllCustomer,
-  create,
-  update,
-  deleteById,
-  getById
-} from '../../controller/User/userController.js';
+import { userController } from '../../controller/index.js';
 
 const router = express.Router();
 
-router.get('/users', getAllCustomer); 
-router.post('/users', saveAllCustomer); 
-router.post('/', create); 
-router.put('/:id', update); 
-router.delete('/:id', deleteById); 
-router.get('/:id', getById); 
+router.get('/', userController.getAllCustomer); 
+router.post('/', userController.saveAllCustomer); 
+router.post('/', userController.create); 
+router.put('/:id', userController.update); 
+router.delete('/:id', userController.deleteById); 
+router.get('/:id', userController.getById); 
 
-export default router;
+export {router as userRouter};

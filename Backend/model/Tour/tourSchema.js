@@ -1,7 +1,7 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("../../database/db.js");
+import { DataTypes } from "sequelize";
+import { sequelize } from "../../database/db.js";
 
-const Tour = sequelize.define("tour", {
+export const Tour = sequelize.define("tour", {
   tourId:{
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -47,4 +47,4 @@ const Tour = sequelize.define("tour", {
   }
 })();
 
-module.exports = Tour;
+

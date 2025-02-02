@@ -1,4 +1,4 @@
-const Users = require("../../model/User/userSchema.js");
+import {Users} from '../../model/index.js'
 
 const getAllCustomer = async (req, res) => {
   console.log("Get All Customer");
@@ -116,7 +116,7 @@ const saveAllCustomer = async (req, res) => {
 };
 
 
-module.exports = {
+export const userController = {
   getAllCustomer,
   create,
   update,

@@ -1,4 +1,4 @@
-const HotelBooking = require("../../model/Hotel/hotelSchema.js");
+import {HotelBooking} from '../../model/index.js'
 
 const getAllHotelBookings = async (req, res) => {
   console.log("Get All Hotel Bookings");
@@ -99,7 +99,7 @@ const saveAllHotelBooking = async (req, res) => {
     }
   };
 
-module.exports = {
+export const hotelController = {
   getAllHotelBookings,
   createHotelBooking,
   updateHotelBooking,

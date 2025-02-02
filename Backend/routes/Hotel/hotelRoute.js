@@ -1,20 +1,13 @@
 import express from 'express';
-import {
-  getAllHotelBookings,
-  saveAllHotelBooking,
-  createHotelBooking,
-  updateHotelBooking,
-  deleteHotelBookingById,
-  getHotelBookingById
-} from '../../controller/Hotel/hotelController.js';
+import { hotelController } from '../../controller/index.js'
 
 const router = express.Router();
 
-router.get('/hotels', getAllHotelBookings); 
-router.post('/hotels', saveAllHotelBooking); 
-router.post('/', createHotelBooking); 
-router.put('/:id', updateHotelBooking); 
-router.delete('/:id', deleteHotelBookingById); 
-router.get('/:id', getHotelBookingById); 
+router.get('/hotels', hotelController.getAllHotelBookings); 
+router.post('/hotels', hotelController.saveAllHotelBooking); 
+router.post('/', hotelController.createHotelBooking); 
+router.put('/:id', hotelController.updateHotelBooking); 
+router.delete('/:id', hotelController.deleteHotelBookingById); 
+router.get('/:id', hotelController.getHotelBookingById); 
 
-export default router;
+export {router as hotelRouter};

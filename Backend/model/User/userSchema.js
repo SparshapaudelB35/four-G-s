@@ -1,34 +1,38 @@
-const { DataTypes, Model } = require("sequelize"); 
-const { sequelize } = require("../../database/db.js");
+import { DataTypes } from "sequelize";
+import { sequelize } from "../../database/db.js";
 
-const Users = sequelize.define("users", {
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false,
+export const Users = sequelize.define("users", {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      isEmail: true,
     },
-    userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true, 
-        autoIncrement: true, 
-    },
-    email : {
-        type: DataTypes.STRING,
-        allowNull:false,
-    },
-    password :{
-        type: DataTypes.STRING,
-        allowNull:false,
-    }
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  }
 });
 
 (async () => {
-    try {
-        await Users.sync();
-        console.log("The Users table has been created or updated");
-    } catch (error) {
-        console.error("Error syncing the Users model:", error.message);
-    }
+  try {
+    await Users.sync();
+    console.log("The Users table has been created or updated");
+  } catch (error) {
+    console.error("Error syncing the Users model:", error.message);
+  }
 })();
 
-module.exports = Users;
+

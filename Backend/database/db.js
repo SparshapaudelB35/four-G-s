@@ -9,14 +9,14 @@ export const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
-    dialect: 'postgres',// other example mysql,oracle,h2
+    dialect: 'postgres',
   }
 );
 
-export const db = () => {
+export const db = async () => {
   try {
     sequelize.sync({alter:true})
-    console.log("database connected successfully")
+    console.log("Database connected successfully")
 
   } catch (e) {
     console.error("fail to connect database successfully",e)
