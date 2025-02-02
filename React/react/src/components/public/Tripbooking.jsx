@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import "../css/tripbooking.css"
 import "../js/tripbooking.js"
 
@@ -21,11 +22,11 @@ function Tripbooking() {
             <a href="#aboutus" id="aboutus-link">About Us</a>
           </li>
           <li>
-            <a href="#" id="mybookings">My Bookings</a>
+          <Link to="/tour-crud" id="mybookings">My Bookings</Link>
           </li>
         </ul>
         <div className="logout">
-          <img src="/Image/logout.png" alt="logout" />
+          <Link to="/login"><img src="/Image/logout.png" alt="logout" /></Link>
         </div>
       </header>
 

@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate , Link} from 'react-router-dom';
 import '../css/hotelCRUD.css';
 
+
 function HotelCRUD() {
+
+    const navigate = useNavigate(); 
+  
   const [formData, setFormData] = useState({
     name: '',
     number: '',
@@ -70,11 +75,11 @@ function HotelCRUD() {
   return (
     <div className='container'>
       <div className='button'>
-        <button className='btn'>Book More</button>
-        <button className='btn'>Tour Booking</button>
+        <button className='btn' onClick={() => navigate('/trip-booking')}>Book More</button>
+        <button className='btn' onClick={() => navigate('/tour-crud')}>Tour Booking</button>
       </div>
       <div className="logout">
-          <img src="/Image/logout.png" alt="logout" />
+          <Link to="/login"><img src="/Image/logout.png" alt="logout" /></Link>
       </div>
       <form autoComplete="off" onSubmit={handleFormSubmit}>
         <div>

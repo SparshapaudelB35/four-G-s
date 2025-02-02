@@ -99,25 +99,29 @@
     padding: 20px;
 }
 
-.input {
-    width: 280px;
-    height: 30px;
-    font-size: 15px;
-    font-weight: 600;
-    padding: 5px 10px;
-    outline: none;
-    margin: 15px;
-    background-color: aliceblue;
-    color: black;
+.Form label {
+    display: block;
+    font-size: 17px;
+    color: white;
+    text-align: left;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-.input::placeholder {
-    opacity: 0.8;
-}
-
-.input:focus {
+input[type="email"] ,input[type="password"] {
+    width: 80%;
+    padding: 10px;
     border: 2px solid black;
-}
+    border-radius: 5px;
+    background: white;
+    color: black;
+    font-size: 14px;
+    align-items:end;
+    margin-left: 30px;
+    margin-top: 2px;
+  }
+  
 
 .Form .remember-forgot {
     display: flex;
@@ -144,7 +148,7 @@
     font-size: 15px;
     font-weight: 600;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 .btn:hover {
     border: 0.16em solid white;
