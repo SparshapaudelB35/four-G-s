@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+.Container{
+    width: 100%;
+    height: 100vh;
+    background-image:url(./Image/tour3.jpg);
+    background-size: cover;
+    background-position: center; 
+    filter: brightness(0.7);      
+}
+.Header{
+    position: fixed;
+    display: flex;
+    width:96%;
+    margin: 18px;
+    margin-top: 30px;
+
+    justify-content: flex-end;
+}
+
+.imagecontainer{
+    display: flex;
+    position: absolute;
+    margin-right: 1110px;
+    gap: 10px;
+    cursor: pointer;
+}
+.imagecontainer img{
+    height: 80px;
+    width: auto;
+}
+.user img{
+    cursor: pointer;
+}
+
+.Information{
+    width: 100%;
+    position:absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: white;
+}
+.Information h1{
+    font-size: 65px;
+    margin-top: 80px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgb(60, 155, 155),
+        0 0 20px rgb(60, 155, 155),
+        0 0 40px rgb(60, 155, 155),
+        0 0 80px rgb(60, 155, 155);
+
+
+
+
+}
+.Information p{
+    margin: 20px auto;
+    font-weight: 200;
+    line-height: 25px;
+    color: rgb(220, 246, 234);
+    text-shadow: 0 0 10px rgb(60, 155, 155),
+    0 0 20px rgb(60, 155, 155),
+    0 0 40px rgb(60, 155, 155),
+    0 0 80px rgb(60, 155, 155);
+}
+button{
+    position: relative;
+    width: 200px;
+    padding: 15px 15px;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid rgb(255, 174, 0);
+    color: white;
+    cursor: pointer;
+    background-color: black;
+}
