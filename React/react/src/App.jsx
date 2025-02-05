@@ -7,6 +7,8 @@ const Forgotpassword = lazy(() => import('./components/public/Forgotpassword.jsx
 const Tripbooking = lazy(() => import('./components/public/Tripbooking.jsx'))
 const TourCRUD = lazy(() => import('./components/public/TourCRUD.jsx'))
 const HotelCRUD = lazy(() => import('./components/public/HotelCRUD.jsx'))
+const BookNow = lazy(() => import('./components/public/BookNow.jsx'))
+const BookNowHotel = lazy(() => import('./components/public/BookNowHotel.jsx'))
 
 
 function App() {
@@ -21,6 +23,10 @@ function App() {
           <Route path='/trip-booking' element={<Tripbooking />} />
           <Route path='/tour-crud' element={<TourCRUD />} />
           <Route path='/hotel-crud' element={<HotelCRUD />} />     
+          <Route path='/booknow' element={<BookNow />} />
+          <Route path='/' element={<BookNowHotel />} />
+
+
       </Routes>
       </Suspense>
     </Router>
