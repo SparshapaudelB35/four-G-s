@@ -10,4 +10,6 @@ router.put('/:id', userController.update);
 router.delete('/:id', userController.deleteById); 
 router.get('/:id', userController.getById); 
 
+
+
 export {router as userRouter};
