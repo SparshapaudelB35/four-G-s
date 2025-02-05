@@ -24,7 +24,7 @@ function App() {
           <Route path='/tour-crud' element={<TourCRUD />} />
           <Route path='/hotel-crud' element={<HotelCRUD />} />     
           <Route path='/booknow' element={<BookNow />} />
-          <Route path='/' element={<BookNowHotel />} />
+          <Route path='/booknowhotel' element={<BookNowHotel />} />
 
 
       </Routes>

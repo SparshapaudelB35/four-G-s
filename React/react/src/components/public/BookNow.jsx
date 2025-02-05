@@ -47,7 +47,9 @@ const Booking = () => {
       <h1>Book Now</h1>
 
       <div className="qr-code-section">
-        <div className="qr-placeholder">QR Code will appear here</div>
+        <div className="qr-placeholder">
+          <img src="/Image/qr.png" alt="qr"/>
+        </div>
       </div>
 
       <div className="Form">

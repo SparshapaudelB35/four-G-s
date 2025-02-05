@@ -70,6 +70,10 @@
     color: #555;
     font-size: 14px;
   }
+  .qr-placeholder img{
+    width: 260px;
+    height: 240px;
+  }
   
   button {
     width: 40%;
