@@ -27,8 +27,12 @@ const login = async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // Return success response
+    // Generate a token for the user
+    const token = generateToken({ user: user.toJSON() });
+
+    // Return success response with token
     return res.status(200).json({
+      data: { access_token: token },
       message: "Successfully logged in",
     });
   } catch (error) {
@@ -36,6 +40,7 @@ const login = async (req, res) => {
     res.status(500).json({ error: "Failed to login" });
   }
 };
+
 
 const create = async (req, res) => {
   try {
