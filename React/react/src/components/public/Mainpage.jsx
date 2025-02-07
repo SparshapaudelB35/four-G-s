@@ -1,6 +1,7 @@
-import React from "react";
-import { useNavigate } from 'react-router-dom';
+import "react";
+import { Link,useNavigate } from 'react-router-dom';
 import '../css/Mainpage.css';
+
 
 function Mainpage() {
     const navigate = useNavigate(); 
@@ -10,10 +11,10 @@ function Mainpage() {
             <img src='/Image/tour3.jpg' alt="Tour Background" />
             <div className="Header">
                 <div className="imagecontainer">
-                    <img src="/Image/logo3.png" alt="logo" />
+                   <img src="/Image/logo3.png" alt="logo" />
                 </div>
                 <div className="user">
-                    <img src="/Image/icons8-user-48.png" alt="user icon" />
+                    <Link to='/adminlogin'><img src="/Image/icons8-user-48.png" alt="user icon" /></Link>
                 </div>
             </div>
 

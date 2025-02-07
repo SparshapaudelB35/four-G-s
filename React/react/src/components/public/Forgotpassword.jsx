@@ -1,9 +1,19 @@
-import React from 'react';
+import 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import '../css/forgotpassword.css';
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import  { useState } from 'react';
+
+
 
 function Forgotpassword() {
+
+  const [showpassword , setshowpassword] = useState(false);
+    const [showretypepassword , setshowretypepassword] = useState(false);
+
+
   const {
     register,
     handleSubmit,
@@ -33,6 +43,7 @@ function Forgotpassword() {
           
           <div>
             <input
+             id='email'
               type="email"
               placeholder="Email"
               {...register("email", {
@@ -50,7 +61,8 @@ function Forgotpassword() {
          
           <div>
             <input
-              type="password"
+              id='password'
+              type={showpassword ? 'text' : 'password'}
               placeholder="Password"
               {...register("password", {
                 required: "Password is required",
@@ -61,13 +73,15 @@ function Forgotpassword() {
               })}
               className="input"
             />
+            <botton onClick={() => setshowpassword(!showpassword)}>{showpassword ? <FaEyeSlash/> : <FaEye/>}</botton>
             {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
           </div>
 
          
           <div>
             <input
-              type="password"
+              id='password'
+              type={showretypepassword ? 'text' : 'password'}
               placeholder="Re-enter Password"
               {...register("confirmPassword", {
                 required: "Please confirm your password",
@@ -76,9 +90,8 @@ function Forgotpassword() {
               })}
               className="input"
             />
-            {errors.confirmPassword && (
-              <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>
-            )}
+            <botton onClick={() => setshowretypepassword(!showretypepassword)}>{showretypepassword ? <FaEyeSlash/> : <FaEye/>}</botton>
+            {errors.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>}
           </div>
 
           <button type="submit" className="btn">

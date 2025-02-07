@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import '../css/loginpage.css';
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 function Loginpage() {
+  const [show,setShow] = useState(false)
+  console.log(show)
+
+
+
   const {
     register,
     handleSubmit,
@@ -84,10 +91,11 @@ function Loginpage() {
             <label htmlFor="password">Password:</label>
             <input
               id="password"
-              type="password"
+              type={show ? 'text' : 'password'}
               placeholder="Password"
               {...register("password", { required: "Password is required" })}
             />
+            <botton onClick={() => setShow(!show)}>{show ? <FaEyeSlash/> : <FaEye/>}</botton>
             {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
           </div>
           <div className="remember-forgot">
@@ -104,7 +112,7 @@ function Loginpage() {
         </form>
         <div className="signup">
           <p>
-            Don't have an account?
+            Don&apos;t have an account?
             <Link to="/signup"> Sign up</Link>
           </p>
         </div>

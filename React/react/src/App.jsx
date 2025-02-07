@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import  { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const Mainpage = lazy(() => import('./components/public/Mainpage.jsx'));
 const Loginpage = lazy(() => import('./components/public/Loginpage.jsx'))
@@ -9,6 +9,8 @@ const TourCRUD = lazy(() => import('./components/public/TourCRUD.jsx'))
 const HotelCRUD = lazy(() => import('./components/public/HotelCRUD.jsx'))
 const BookNow = lazy(() => import('./components/public/BookNow.jsx'))
 const BookNowHotel = lazy(() => import('./components/public/BookNowHotel.jsx'))
+const Adminlogin = lazy(() => import('./components/public/Adminlogin.jsx'))
+const AdmintourCRUD = lazy(() => import('./components/public/AdmintourCRUD.jsx'))
 
 
 function App() {
@@ -25,8 +27,9 @@ function App() {
           <Route path='/hotel-crud' element={<HotelCRUD />} />     
           <Route path='/booknow' element={<BookNow />} />
           <Route path='/booknowhotel' element={<BookNowHotel />} />
-
-
+          <Route path='/adminlogin' element={<Adminlogin/>} />
+          <Route path='/admintourcrud' element={<AdmintourCRUD/>} />
+          
       </Routes>
       </Suspense>
     </Router>
