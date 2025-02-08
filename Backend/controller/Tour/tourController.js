@@ -1,29 +1,70 @@
-import {Tour} from '../../model/index.js';
+import { Tour } from '../../model/index.js';
 
 const getAllTours = async (req, res) => {
-  console.log("Get All Tours");
   try {
     const tours = await Tour.findAll();
-    res.status(200).send({ data: tours, message: "Successfully fetched tours" });
+    res.status(200).json({ data: tours, message: "Successfully fetched tours" });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json("Error while fetching tours");
+    console.error(error);
+    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
   }
 };
-
-const createTour = async (req, res) => {
+const saveAllTour = async (req, res) => {
   try {
-    const body = req.body;
+    const { tourId } = req.body;
 
-    if (!body?.name || !body?.contactNumber || !body?.place) {
-      return res.status(400).send({ message: "Invalid payload" });
+    if (!tourId) {
+      return res.status(400).json({ message: "Tour ID is required" });
     }
 
-    const tour = await Tour.create(body);
-    res.status(201).send({ data: tour, message: "Successfully created tour" });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({ error: "Failed to create tour" });
+    const existingTour = await Tour.findOne({ where: { tourId } });
+    if (existingTour) {
+      return res.status(409).json({ message: "Tour already exists" });
+    }
+
+    await Tour.create(req.body);
+    res.status(201).json({ message: "Tour added successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
+  }
+};
+const createTour = async (req, res) => {
+  try {
+    const { name, contactNumber, destination, numberOfPassengers, startDate, endDate, totalPrice } = req.body;
+
+    // Validate required fields
+    if (!name || !contactNumber || !destination || !numberOfPassengers || !startDate || !endDate) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    // Validate contactNumber
+    if (!/^\d+$/.test(contactNumber)) {
+      return res.status(400).json({ message: "Invalid contact number" });
+    }
+
+    // Validate dates
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    if (isNaN(start.getTime()) || isNaN(end.getTime()) || start >= end) {
+      return res.status(400).json({ message: "Invalid date range" });
+    }
+
+    // Validate numberOfPassengers
+    if (numberOfPassengers <= 0 || !Number.isInteger(numberOfPassengers)) {
+      return res.status(400).json({ message: "Number of passengers must be a positive integer" });
+    }
+
+    // Validate totalPrice
+    if (totalPrice < 0 || typeof totalPrice !== "number") {
+      return res.status(400).json({ message: "Invalid total price" });
+    }
+
+    const tour = await Tour.create({ name, contactNumber, destination, numberOfPassengers, startDate, endDate, totalPrice });
+    res.status(201).json({ data: tour, message: "Successfully created tour" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
   }
 };
 
@@ -32,72 +73,61 @@ const updateTour = async (req, res) => {
     const { id } = req.params;
     const body = req.body;
 
-    const oldTour = await Tour.findOne({ where: { tourId: id } });
-
-    if (!oldTour) {
-      return res.status(404).send({ message: "Tour not found" });
+    const tour = await Tour.findByPk(id);
+    if (!tour) {
+      return res.status(404).json({ message: "Tour not found" });
     }
 
-    oldTour.name = body.name;
-    oldTour.place = body.place || oldTour.place;
-    oldTour.contactNumber = body.contactNumber;
-    await oldTour.save();
+    // Update only allowed fields
+    const allowedFields = ["name", "contactNumber", "destination", "numberOfPassengers", "startDate", "endDate", "totalPrice"];
+    allowedFields.forEach((field) => {
+      if (body[field] !== undefined) {
+        tour[field] = body[field];
+      }
+    });
 
-    res.status(200).send({ data: oldTour, message: "Tour updated successfully" });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({ error: "Failed to update tour" });
+    await tour.save();
+    res.status(200).json({ data: tour, message: "Tour updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
   }
 };
 
 const deleteTourById = async (req, res) => {
   try {
     const { id } = req.params;
-    const oldTour = await Tour.findOne({ where: { tourId: id } });
 
-    if (!oldTour) {
-      return res.status(404).send({ message: "Tour not found" });
+    const tour = await Tour.findByPk(id);
+    if (!tour) {
+      return res.status(404).json({ message: "Tour not found" });
     }
 
-    await oldTour.destroy();
-    res.status(200).send({ message: "Tour deleted successfully" });
-  } catch (e) {
-    res.status(500).json({ error: "Failed to delete tour" });
+    await tour.destroy();
+    res.status(200).json({ data: null, message: "Tour deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
   }
 };
 
 const getTourById = async (req, res) => {
   try {
     const { id } = req.params;
-    const tour = await Tour.findOne({ where: { tourId: id } });
 
+    const tour = await Tour.findByPk(id);
     if (!tour) {
-      return res.status(404).send({ message: "Tour not found" });
+      return res.status(404).json({ message: "Tour not found" });
     }
 
-    res.status(200).send({ message: "Tour fetched successfully", data: tour });
-  } catch (e) {
-    res.status(500).json({ error: "Failed to fetch tour" });
+    res.status(200).json({ data: tour, message: "Tour fetched successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
   }
 };
 
-const saveAllTour = async (req, res) => {
-    console.log(req.body);
-    const { tourId, name, place,numberOfPassengers, contactNumber,startDate,endDate,totalPrice } = req.body;
-  
-    try {
-      const tour = await Tour.findOne({ where: { tourId: tourId } });
-  
-      if (tour == null) {
-        await Tour.create(req.body);
-        return res.status(201).json({ message: "Tour added successfully" });
-      }
-      return res.status(500).json({ message: "Tour is already present" });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: "Failed to save tour" });
-    }
-  };
+
 
 export const tourController = {
   getAllTours,

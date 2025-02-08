@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import { db } from "./database/db.js";
 import { userRouter } from "./routes/index.js";
+import { hotelRouter } from "./routes/index.js";
+import { tourRouter } from "./routes/index.js";
 import { authRouter } from "./routes/index.js";
 import dotenv from "dotenv";
 import { authenticateToken } from "./middleware/token-middleware.js";
@@ -23,7 +25,7 @@ app.use((req, res, next) => {
   const publicRoutes = [
     '/api/auth/create', 
     '/api/auth/login',   
-    '/api/auth/init',    
+    '/api/auth/init',   
   ];
 
   if (publicRoutes.includes(req.path)) {
@@ -35,6 +37,8 @@ app.use((req, res, next) => {
 });
 
 
+app.use("/api/hotel",hotelRouter);
+app.use("/api/tours",tourRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 

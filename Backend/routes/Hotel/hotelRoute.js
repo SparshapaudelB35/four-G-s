@@ -1,5 +1,5 @@
 import express from 'express';
-import { hotelController } from '../../controller/index.js'
+import { hotelController } from '../../controller/index.js';
 
 const router = express.Router();
 

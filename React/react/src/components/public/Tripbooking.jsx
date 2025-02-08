@@ -1,19 +1,120 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom';
 import "../css/tripbooking.css";
 import "../js/tripbooking.js";
+import Axios from 'axios';
+
 
 function Tripbooking() {
+
+ 
+  const handleTourBooking = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("authToken"); // Retrieve the token from localStorage
+  
+    if (!token) {
+      alert("You are not logged in. Please log in first.");
+      return;
+    }
+  
+    const tourData = {
+      name,
+      contactNumber,
+      numberOfPassengers: tourPassengers,
+      destination: searchPlaceValue,
+      startDate: tourFromDate,
+      endDate: tourToDate,
+      totalPrice: tourTotalPrice,
+    };
+  
+    try {
+      const response = await Axios.post("http://localhost:4000/api/tours", tourData , {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
+      alert("Tour booked successfully");
+      console.log(response.data);
+    } catch (error) {
+      alert("Please fill all the fields");
+      console.error(error);
+    }
+  };
+   
+  const handleHotelBooking = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("authToken"); 
+  
+    if (!token) {
+      alert("You are not logged in. Please log in first.");
+      return;
+    }
+  
+    const hotelData = {
+      name ,
+      contactNumber ,
+      numberOfPeople: hotelGuests,
+      hotelName: searchHotelValue,
+      startDate: hotelFromDate,
+      endDate: hotelToDate,
+      totalPrice: hotelTotalPrice,
+    };
+  
+    try {
+      const response = await Axios.post("http://localhost:4000/api/hotel", hotelData , {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
+      alert("Hotel booked successfully");
+      console.log(response.data);
+    } catch (error) {
+      alert("Please fill all the fields");
+      console.error(error);
+    }
+  };
+
+  const tourBookingRef = useRef(null);
+  const [name, setName] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+
+
   const [showPlacesList, setShowPlacesList] = useState(false);
   const [showHotelsList, setShowHotelsList] = useState(false);
   const [searchPlaceValue, setSearchPlaceValue] = useState("");
   const [searchHotelValue, setSearchHotelValue] = useState("");
+  const [tourPassengers, setTourPassengers] = useState(1);
+  const [hotelGuests, setHotelGuests] = useState(1);
+  const [tourFromDate, setTourFromDate] = useState("");
+  const [tourToDate, setTourToDate] = useState("");
+  const [hotelFromDate, setHotelFromDate] = useState("");
+  const [hotelToDate, setHotelToDate] = useState("");
+  const [tourTotalPrice, setTourTotalPrice] = useState(0);
+  const [hotelTotalPrice, setHotelTotalPrice] = useState(0);
+
+  const updateHotelTotal = () => {
+    const numberOfDays = calculateDays(hotelFromDate, hotelToDate);
+    setHotelTotalPrice(hotelGuests * numberOfDays * (hotelToPriceMap[searchHotelValue] || 0));
+  };
+
 
   const placeToHotelMap = {
     Ilam: "Hotel Hillside Kanyam",
     Mustang: "Lo Mustang Himalayan",
     Pokhara: "The Silver Oaks Inn",
   };
+  const placeToPriceMap = {
+    Ilam: 3000,
+    Mustang: 5000,
+    Pokhara: 4100,
+  };
+
+  const hotelToPriceMap = {
+    "Hotel Hillside Kanyam": 2000,
+    "Lo Mustang Himalayan": 2400,
+    "The Silver Oaks Inn": 7000,
+  };
+
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -30,10 +131,22 @@ function Tripbooking() {
     };
   }, []);
 
+  const calculateDays = (fromDate, toDate) => {
+    const from = new Date(fromDate);
+    const to = new Date(toDate);
+    return fromDate && toDate && to > from ? (to - from) / (1000 * 60 * 60 * 24) : 0;
+  };
+
+  const updateTourTotal = () => {
+    const numberOfDays = calculateDays(tourFromDate, tourToDate);
+    setTourTotalPrice(tourPassengers * numberOfDays * (placeToPriceMap[searchPlaceValue] || 0));
+  };
+
   const handlePlaceClick = (place) => {
     setSearchPlaceValue(place);
-    setSearchHotelValue(placeToHotelMap[place] || ""); // Automatically set the hotel
+    setSearchHotelValue(placeToHotelMap[place] || ""); 
     setShowPlacesList(false);
+    tourBookingRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleHotelClick = (hotel) => {
@@ -85,19 +198,19 @@ function Tripbooking() {
             <img src="./Image/Ilam.png" alt="Ilam" />
             <h1>Ilam</h1>
             <h2>Rs 3000/Person/Day & Night</h2>
-            <a href="#TourBooking" ><button className="bn3">Book Now</button></a>
+            <button className="bn3"  onClick={() => handlePlaceClick("Ilam")}>Book Now</button>
           </div>
           <div className="item2" id="2">
             <img src="./Image/mustang.png" alt="Mustang" />
             <h1>Mustang</h1>
             <h2>Rs 5000/Person/Day & Night</h2>
-            <a href="#TourBooking" ><button className="bn3">Book Now</button></a>
+            <button className="bn3"  onClick={() => handlePlaceClick("Mustang")}>Book Now</button>
           </div>
           <div className="item3" id="3">
             <img src="./Image/Pokhara.png" alt="Pokhara" />
             <h1>Pokhara</h1>
             <h2>Rs 4100/Person/Day & Night</h2>
-            <a href="#TourBooking" ><button className="bn3">Book Now</button></a>
+            <button className="bn3" onClick={() => handlePlaceClick("Pokhara")}>Book Now</button>
           </div>
         </div>
 
@@ -125,15 +238,37 @@ function Tripbooking() {
           </div>
         </div>
 
-        <div className="TourBooking" id="TourBooking">
+        <div className="TourBooking"  ref={tourBookingRef} id="TourBooking">
           <div className="tourbooking1" id="1">
             <img src="./Image/bus.jpg" alt="bus" />
           </div>
           <div className="tourbooking2" id="2">
             <h1>Book Your Tour</h1>
-            <input type="text" placeholder="Enter Your Name" className="input" />
-            <input type="text" placeholder="Provide Your Number" className="input" />
-            <input type="number" placeholder="Number of Passenger" className="input" />
+            <input
+              type="text"
+              className="input"
+              placeholder="Enter Your Name"
+              name="name" 
+              value={name} 
+              onChange={(e) => setName(e.target.value)} 
+            />
+            <input
+                type="text"
+                name="contactNumber"
+                placeholder="Enter Your Number"
+                className="input"
+                value={contactNumber} 
+                onChange={(e) => setContactNumber(e.target.value)} 
+              />
+            <input
+              type="number"
+              placeholder="Number of Passengers"
+              className="input"
+              min="1"
+              value={tourPassengers}
+              onChange={(e) => setTourPassengers(Number(e.target.value))}
+              onBlur={updateTourTotal}
+            />
             <div className="search-container">
             <input
               type="text"
@@ -155,22 +290,54 @@ function Tripbooking() {
             )}
           </div>
             <label htmlFor="from-date">From:</label>
-            <input type="date" id="from-date" className="inputdate" />
+            <input
+              type="date"
+              className="inputdate"
+              value={tourFromDate}
+              onChange={(e) => { setTourFromDate(e.target.value); updateTourTotal(); }}
+            />
             <label htmlFor="to-date">To:</label>
-            <input type="date" id="to-date" className="inputdate" />
+            <input
+              type="date"
+              className="inputdate"
+              value={tourToDate}
+              onChange={(e) => { setTourToDate(e.target.value); updateTourTotal(); }}
+            />
             <div className="Total">
-              <p>Total:</p>
+              <p>Total: Rs {tourTotalPrice}</p>
             </div>
-            <button href="#" className="bn4">Book It</button>
+            <button href="#"onClick={handleTourBooking} className="bn4">Book It</button>
           </div>
         </div>
 
         <div className="HotelBooking" id="HotelBooking">
           <div className="hotelbooking1" id="1">
             <h1>Book Your Hotel</h1>
-            <input type="text" placeholder="Enter Your Name" className="input" />
-            <input type="text" placeholder="Provide Your Number" className="input" />
-            <input type="number" placeholder="Number of People" className="input" />
+            <input
+              type="text"
+              className="input"
+              placeholder="Enter Your Name"
+              name="name" 
+              value={name} 
+              onChange={(e) => setName(e.target.value)} 
+            />
+            <input
+                type="text"
+                name="contactNumber"
+                placeholder="Enter Your Number"
+                className="input"
+                value={contactNumber} 
+                onChange={(e) => setContactNumber(e.target.value)} 
+              />
+            <input
+              type="number"
+              placeholder="Number of People"
+              className="input"
+              min="1"
+              value={hotelGuests}
+              onChange={(e) => setHotelGuests(Number(e.target.value))}
+              onBlur={updateHotelTotal}
+            />
             <div className="search-container2">
             <input
               type="text"
@@ -192,18 +359,28 @@ function Tripbooking() {
             )}
           </div>
             <label htmlFor="from-date">From:</label>
-            <input type="date" id="from-date" className="inputdate" />
+            <input
+              type="date"
+              className="inputdate"
+              value={hotelFromDate}
+              onChange={(e) => { setHotelFromDate(e.target.value); updateHotelTotal(); }}
+            />
             <label htmlFor="to-date">To:</label>
-            <input type="date" id="to-date" className="inputdate" />
+            <input
+              type="date"
+              className="inputdate"
+              value={hotelToDate}
+              onChange={(e) => { setHotelToDate(e.target.value); updateHotelTotal(); }}
+            />
             <div className="Total">
-              <p>Total:</p>
+              <p>Total: Rs{hotelTotalPrice}</p>
             </div>
             <label className="check">
               <input type="checkbox" />
               Trip to here already booked?
             </label>
             <br />
-            <button href="#" className="bn4">Book It</button>
+            <button href="#"onClick={handleHotelBooking} className="bn4">Book It</button>
           </div>
           <div className="hotelbooking2" id="2">
             <img src="./Image/hotel.jpg" alt="hotel" />

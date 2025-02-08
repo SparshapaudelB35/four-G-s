@@ -34,7 +34,7 @@ function Adminlogin() {
         if (response.status === 200) {
           setMessage("Login successful!");
           alert("Login successful!");
-          navigate("/admintourcrud"); 
+          navigate("/adminhotelcrud"); 
         }
       } catch (error) {
         if (error.response) {

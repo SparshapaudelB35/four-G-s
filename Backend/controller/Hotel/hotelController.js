@@ -1,104 +1,128 @@
-import {HotelBooking} from '../../model/index.js'
+import { Hotel } from "../../model/index.js";
 
+// Fetch all hotel bookings
 const getAllHotelBookings = async (req, res) => {
-  console.log("Get All Hotel Bookings");
   try {
-    const bookings = await HotelBooking.findAll();
-    res.status(200).send({ data: bookings, message: "Successfully fetched hotel bookings" });
+    const bookings = await Hotel.findAll();
+    res.status(200).json({ data: bookings, message: "Successfully fetched hotel bookings" });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json("Error while fetching hotel bookings");
+    console.error(error);
+    res.status(500).json({ error: "Error while fetching hotel bookings" });
   }
 };
 
+// Create a new hotel booking
 const createHotelBooking = async (req, res) => {
   try {
-    const body = req.body;
+    const { name, contactNumber, hotelName, numberOfPeople, startDate, endDate, totalPrice } = req.body;
 
-    if (!body?.name || !body?.contactNumber || !body?.hotelName) {
-      return res.status(400).send({ message: "Invalid payload" });
+    // Validate required fields
+    if (!name || !contactNumber || !hotelName || !numberOfPeople || !startDate || !endDate) {
+      return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const booking = await HotelBooking.create(body);
-    res.status(201).send({ data: booking, message: "Successfully created hotel booking" });
-  } catch (e) {
-    console.log(e);
+    // Create the hotel booking
+    const booking = await Hotel.create({
+      name,
+      contactNumber,
+      hotelName,
+      numberOfPeople,
+      startDate,
+      endDate,
+      totalPrice,
+    });
+
+    res.status(201).json({ data: booking, message: "Hotel booking created successfully" });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to create hotel booking" });
   }
 };
 
+// Update an existing hotel booking
 const updateHotelBooking = async (req, res) => {
   try {
     const { id } = req.params;
     const body = req.body;
 
-    const oldBooking = await HotelBooking.findOne({ where: { bookingId: id } });
-
-    if (!oldBooking) {
-      return res.status(404).send({ message: "Booking not found" });
+    // Find the booking by ID
+    const booking = await Hotel.findOne({ where: { bookingId: id } });
+    if (!booking) {
+      return res.status(404).json({ message: "Hotel booking not found" });
     }
 
-    oldBooking.name = body.name;
-    oldBooking.hotelName = body.hotelName || oldBooking.hotelName;
-    oldBooking.contactNumber = body.contactNumber;
-    oldBooking.isTripAlreadyBooked = body.isTripAlreadyBooked || oldBooking.isTripAlreadyBooked;
-    await oldBooking.save();
+    // Update the booking fields
+    Object.assign(booking, body);
+    await booking.save();
 
-    res.status(200).send({ data: oldBooking, message: "Booking updated successfully" });
-  } catch (e) {
-    console.log(e);
+    res.status(200).json({ data: booking, message: "Hotel booking updated successfully" });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to update hotel booking" });
   }
 };
 
+// Delete a hotel booking by ID
 const deleteHotelBookingById = async (req, res) => {
   try {
     const { id } = req.params;
-    const oldBooking = await HotelBooking.findOne({ where: { bookingId: id } });
 
-    if (!oldBooking) {
-      return res.status(404).send({ message: "Booking not found" });
+    // Find the booking by ID
+    const booking = await Hotel.findOne({ where: { bookingId: id } });
+    if (!booking) {
+      return res.status(404).json({ message: "Hotel booking not found" });
     }
 
-    await oldBooking.destroy();
-    res.status(200).send({ message: "Hotel Booking deleted successfully" });
-  } catch (e) {
+    // Delete the booking
+    await booking.destroy();
+
+    res.status(200).json({ message: "Hotel booking deleted successfully" });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to delete hotel booking" });
   }
 };
 
+// Fetch a single hotel booking by ID
 const getHotelBookingById = async (req, res) => {
   try {
     const { id } = req.params;
-    const booking = await HotelBooking.findOne({ where: { bookingId: id } });
 
+    // Find the booking by ID
+    const booking = await Hotel.findOne({ where: { bookingId: id } });
     if (!booking) {
-      return res.status(404).send({ message: "Booking not found" });
+      return res.status(404).json({ message: "Hotel booking not found" });
     }
 
-    res.status(200).send({ message: "Booking fetched successfully", data: booking });
-  } catch (e) {
+    res.status(200).json({ data: booking, message: "Hotel booking fetched successfully" });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to fetch hotel booking" });
   }
 };
-const saveAllHotelBooking = async (req, res) => {
-    console.log(req.body);
-    const { bookingId, name, hotelName,numberOfPeople, contactNumber, fromDate, endDate , totalPrice } = req.body;
-  
-    try {
-      const booking = await HotelBooking.findOne({ where: { bookingId: bookingId } });
-  
-      if (booking == null) {
-        await HotelBooking.create(req.body);
-        return res.status(201).json({ message: "Hotel booking added successfully" });
-      }
-      return res.status(500).json({ message: "Hotel booking already exists" });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: "Failed to save hotel booking" });
-    }
-  };
 
+// Save or create a hotel booking (if it doesn't already exist)
+const saveAllHotelBooking = async (req, res) => {
+  try {
+    const { bookingId } = req.body;
+
+    // Check if the booking already exists
+    const existingBooking = await Hotel.findOne({ where: { bookingId } });
+    if (existingBooking) {
+      return res.status(409).json({ message: "Hotel booking already exists" });
+    }
+
+    // Create the booking
+    await Hotel.create(req.body);
+
+    res.status(201).json({ message: "Hotel booking added successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to save hotel booking" });
+  }
+};
+
+// Export the controller methods
 export const hotelController = {
   getAllHotelBookings,
   createHotelBooking,

@@ -34,7 +34,7 @@ export const Tour = sequelize.define("tour", {
   },
   totalPrice: {
     type: DataTypes.FLOAT,
-    allowNull: true, // Allow null in case the price is computed later
+    allowNull: false, 
   },
 });
 

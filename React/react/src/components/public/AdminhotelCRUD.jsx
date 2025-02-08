@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import { useNavigate , Link} from 'react-router-dom';
-import '../css/admintourcrud.css'
+import '../css/adminhotelcrud.css'
 
-
-
-
-function AdmintourCRUD() {
+function AdminhotelCRUD() {
     const navigate = useNavigate(); 
 
 
@@ -14,7 +11,7 @@ function AdmintourCRUD() {
       name: '',
       number: '',
       people: '',
-      place: '',
+      hotel: '',
       fromDate: '',
       toDate: '',
       price: '',
@@ -47,7 +44,7 @@ function AdmintourCRUD() {
         name: '',
         number: '',
         people: '',
-        place: '',
+        hotel: '',
         fromDate: '',
         toDate: '',
         price: '',
@@ -75,7 +72,7 @@ function AdmintourCRUD() {
     return (
       <div className='container'>
         <div className='button'>
-          <button className='btn' onClick={() => navigate('/adminhotelcrud')}>Hotel Dashboard</button>
+          <button className='btn' onClick={() => navigate('/admintourcrud')}>Tour Dashboard</button>
         </div>
         <div className="logout">
             <Link to="/adminlogin"><img src="/Image/logout.png" alt="logout" /></Link>          
@@ -102,7 +99,7 @@ function AdmintourCRUD() {
             />
           </div>
           <div>
-            <label>Number of Passanger</label>
+            <label>Number of People</label>
             <input
               type="number"
               name="people"
@@ -112,7 +109,7 @@ function AdmintourCRUD() {
             />
           </div>
           <div>
-            <label>Place Name</label>
+            <label>Hotel Name</label>
             <input
               type="text"
               name="place"
@@ -162,8 +159,8 @@ function AdmintourCRUD() {
             <tr>
               <th>Name</th>
               <th>Phone Number</th>
-              <th>Number of Passanger</th>
-              <th>Place Name</th>
+              <th>Number of People</th>
+              <th>Hotel Name</th>
               <th>From Date</th>
               <th>To Date</th>
               <th>Total Price</th>
@@ -176,7 +173,7 @@ function AdmintourCRUD() {
                 <td>{record.name}</td>
                 <td>{record.number}</td>
                 <td>{record.people}</td>
-                <td>{record.place}</td>
+                <td>{record.hotel}</td>
                 <td>{record.fromDate}</td>
                 <td>{record.toDate}</td>
                 <td>{record.price}</td>
@@ -190,6 +187,7 @@ function AdmintourCRUD() {
         </table>
       </div>
     );
+  
 }
 
-export default AdmintourCRUD
+export default AdminhotelCRUD

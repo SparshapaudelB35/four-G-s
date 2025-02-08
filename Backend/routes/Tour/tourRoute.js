@@ -3,8 +3,8 @@ import { tourController } from '../../controller/index.js';
 
 const router = express.Router();
 
-router.get('/tours', tourController.getAllTours); 
-router.post('/tours', tourController.saveAllTour); 
+router.get('/', tourController.getAllTours); 
+router.post('/save', tourController.saveAllTour); 
 router.post('/', tourController.createTour); 
 router.put('/:id', tourController.updateTour); 
 router.delete('/:id', tourController.deleteTourById); 

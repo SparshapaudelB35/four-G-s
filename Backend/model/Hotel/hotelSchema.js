@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../database/db.js";
 
-export const HotelBooking = sequelize.define("hotelBooking", {
+export const Hotel = sequelize.define("hotel", {
   bookingId:{
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -44,10 +44,10 @@ export const HotelBooking = sequelize.define("hotelBooking", {
 
 (async () => {
   try {
-    await HotelBooking.sync();
-    console.log("The HotelBooking table has been created or updated");
+    await Hotel.sync();
+    console.log("The Hotel table has been created or updated");
   } catch (error) {
-    console.error("Error syncing the HotelBooking model:", error.message);
+    console.error("Error syncing the Hotel model:", error.message);
   }
 })();
 

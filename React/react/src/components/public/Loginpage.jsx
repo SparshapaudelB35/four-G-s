@@ -33,6 +33,8 @@ function Loginpage() {
       console.log("Response received:", response.data);
   
       if (response.status === 200) {
+        const token = response.data.token; // Assuming the token is returned in the response
+        localStorage.setItem("authToken", token); // Store the token
         setMessage("Login successful!");
         alert("Login successful!");
         navigate("/trip-booking"); 

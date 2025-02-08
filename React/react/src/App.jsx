@@ -7,10 +7,9 @@ const Forgotpassword = lazy(() => import('./components/public/Forgotpassword.jsx
 const Tripbooking = lazy(() => import('./components/public/Tripbooking.jsx'))
 const TourCRUD = lazy(() => import('./components/public/TourCRUD.jsx'))
 const HotelCRUD = lazy(() => import('./components/public/HotelCRUD.jsx'))
-const BookNow = lazy(() => import('./components/public/BookNow.jsx'))
-const BookNowHotel = lazy(() => import('./components/public/BookNowHotel.jsx'))
 const Adminlogin = lazy(() => import('./components/public/Adminlogin.jsx'))
 const AdmintourCRUD = lazy(() => import('./components/public/AdmintourCRUD.jsx'))
+const AdminhotelCRUD = lazy(() => import('./components/public/AdminhotelCRUD.jsx'))
 
 
 function App() {
@@ -25,10 +24,9 @@ function App() {
           <Route path='/trip-booking' element={<Tripbooking />} />
           <Route path='/tour-crud' element={<TourCRUD />} />
           <Route path='/hotel-crud' element={<HotelCRUD />} />     
-          <Route path='/booknow' element={<BookNow />} />
-          <Route path='/booknowhotel' element={<BookNowHotel />} />
           <Route path='/adminlogin' element={<Adminlogin/>} />
           <Route path='/admintourcrud' element={<AdmintourCRUD/>} />
+          <Route path='/adminhotelcrud' element={<AdminhotelCRUD/>} />
           
       </Routes>
       </Suspense>
