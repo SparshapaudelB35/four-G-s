@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Axios from 'axios';
 import '../css/tourCRUD.css';
@@ -17,73 +17,81 @@ function TourCRUD() {
   const [records, setRecords] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
 
-  const getAuthHeader = () => {
-    const token = localStorage.getItem('authToken');
-    return token ? { Authorization: `Bearer ${token}` } : {};
-  };
+  // Function to retrieve the token
+  const getAuthHeader = useCallback(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You are not logged in. Please log in first.");
+      navigate('/login');
+      return {};
+    }
+    return { Authorization: `Bearer ${token}` };
+  }, [navigate]);
 
-  // Fetch all tours on component mount
+  // Fetch tours when the component mounts
   useEffect(() => {
     const fetchTours = async () => {
       try {
-        const response = await Axios.get("http://localhost:4000/api/tours");
+        const response = await Axios.get("http://localhost:4000/api/tours", {
+          headers: getAuthHeader(),
+        });
         setRecords(response.data.data);
       } catch (error) {
-        console.error("Error fetching tours:", error);
-        alert("Failed to fetch tours. Please try again later.");
+        if (error.response?.status === 401) {
+          alert("You are not logged in. Please log in first.");
+          navigate('/login');
+        } else {
+          alert("Failed to fetch tours. Please try again later.");
+        }
       }
     };
     fetchTours();
-  }, []);
+  }, [navigate, getAuthHeader]);
 
+  // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-
-    // Validate required fields
+  // Validate form data
+  const validateFormData = () => {
     if (Object.values(formData).some(value => !value)) {
       alert('All fields must be filled!');
-      return;
+      return false;
     }
-
-    // Validate contactNumber
     if (!/^\d+$/.test(formData.contactNumber)) {
       alert('Invalid contact number');
-      return;
+      return false;
     }
-
-    // Validate numberOfPassengers
     if (formData.numberOfPassengers <= 0 || !Number.isInteger(Number(formData.numberOfPassengers))) {
       alert('Number of passengers must be a positive integer');
-      return;
+      return false;
     }
-
-    // Validate dates
     const start = new Date(formData.startDate);
     const end = new Date(formData.endDate);
     if (isNaN(start.getTime()) || isNaN(end.getTime()) || start >= end) {
       alert('Invalid date range');
-      return;
+      return false;
     }
-
-    // Validate totalPrice
     if (formData.totalPrice <= 0 || isNaN(parseFloat(formData.totalPrice))) {
       alert('Total price must be a positive number');
+      return false;
+    }
+    return true;
+  };
+
+  // Handle form submission (update tour)
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateFormData()) {
       return;
     }
-
- 
-    
     try {
       if (editingIndex !== null) {
-        // Update existing tour (needs authentication)
-        const tourId = records[editingIndex].tourId;
+        const Id = records[editingIndex].tourId;
         const response = await Axios.put(
-          `http://localhost:4000/api/tours/${tourId}`,
+          `http://localhost:4000/api/tours/${Id}`,
           formData,
           { headers: getAuthHeader() }
         );
@@ -94,25 +102,21 @@ function TourCRUD() {
           resetForm();
         }
       } else {
-        // Create new tour (needs authentication)
-        const response = await Axios.post(
-          "http://localhost:4000/api/tours",
-          formData,
-          { headers: getAuthHeader() }
-        );
-        if (response.data.success) {
-          setRecords([...records, response.data.data]);
-          resetForm();
-        }
+        alert("No record selected for editing.");
       }
     } catch (error) {
-      console.error("Error:", error);
       if (error.response?.status === 401) {
+        alert(error.response?.data?.message || "Unauthorized access");
+        navigate('/login');
+      } else if (error.response?.status === 403) {
+        alert("You do not have permission to update this tour.");
+      } else {
         alert(error.response?.data?.message || "An error occurred");
       }
     }
   };
 
+  // Reset the form
   const resetForm = () => {
     setFormData({
       name: '',
@@ -126,54 +130,43 @@ function TourCRUD() {
     setEditingIndex(null);
   };
 
-
-  
-
-
-
+  // Handle editing a record
   const handleEdit = (index) => {
     const record = records[index];
-  setFormData({
-    ...record,
-    // Format the dates to YYYY-MM-DD 
-    startDate: record.startDate.split('T')[0],
-    endDate: record.endDate.split('T')[0],
-    name: record.name,
-    contactNumber: record.contactNumber,
-    numberOfPassengers: record.numberOfPassengers,
-    destination: record.destination,
-    totalPrice: record.totalPrice
-  });
-  setEditingIndex(index);
+    setFormData({
+      ...record,
+      startDate: record.startDate.split('T')[0],
+      endDate: record.endDate.split('T')[0],
+    });
+    setEditingIndex(index);
   };
 
-
-
-const handleDelete = async (index) => {
-
-  if (window.confirm('Are you sure you want to delete this record?')) {
-    try {
-      const tourId = records[index].tourId;
-      const response = await Axios.delete(
-        `http://localhost:4000/api/tours/${tourId}`,
-        { headers: getAuthHeader() }
-      );
-      
-      if (response.data.success) {
-        setRecords(records.filter((_, i) => i !== index));
-      } else {
-        alert("Failed to delete tour");
-      }
-    } catch (error) {
-      console.error("Error deleting tour:", error);
-      if (error.response?.status === 401) {
-        alert(error.response?.data?.message || "Failed to delete tour");
+  // Handle deleting a record
+  const handleDelete = async (index) => {
+    if (window.confirm('Are you sure you want to delete this record?')) {
+      try {
+        const tourId = records[index].tourId;
+        const response = await Axios.delete(`http://localhost:4000/api/tours/${tourId}`, {
+          headers: getAuthHeader(),
+        });
+  
+        if (response.data.success) {
+          setRecords(records.filter((_, i) => i !== index));
+        } else {
+          alert("Failed to delete tour");
+        }
+      } catch (error) {
+        if (error.response?.status === 401) {
+          alert("Unauthorized access. Please log in again.");
+          navigate('/login');
+        } else if (error.response?.status === 403) {
+          alert("You do not have permission to delete this tour.");
+        } else {
+          alert(error.response?.data?.message || "An error occurred");
+        }
       }
     }
-  }
-
-};
-
+  };
   return (
     <div className='container'>
       <div className='button'>
@@ -255,10 +248,11 @@ const handleDelete = async (index) => {
           />
         </div>
         <div className="button">
-          <input type="submit" value={editingIndex !== null ? 'Update' : 'Book Now'} />
+          <input type="submit" value="Update"/>
           <input type="reset" value="Reset" onClick={resetForm} />
         </div>
       </form>
+      <div className='scroll-table'>
       <table className="list">
         <thead>
           <tr>
@@ -290,6 +284,7 @@ const handleDelete = async (index) => {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }

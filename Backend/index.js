@@ -11,6 +11,7 @@ import { authenticateToken } from "./middleware/token-middleware.js";
 dotenv.config();
 const app = express();
 
+
 const port = process.env.PORT || 4000;
 
 
@@ -41,6 +42,8 @@ app.use("/api/hotel",hotelRouter);
 app.use("/api/tours",tourRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
+
+app.options('/api/tours/:id', cors());
 
 
 app.listen(port, () => {

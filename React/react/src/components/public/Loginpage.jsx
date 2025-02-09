@@ -24,7 +24,7 @@ function Loginpage() {
     try {
       console.log("Sending login request with data:", data);
   
-      //  login request to the backend
+     
       const response = await Axios.post("http://localhost:4000/api/auth/login", {
         email: data.email,
         password: data.password,
@@ -33,8 +33,9 @@ function Loginpage() {
       console.log("Response received:", response.data);
   
       if (response.status === 200) {
-        const token = response.data.token; // Assuming the token is returned in the response
-        localStorage.setItem("authToken", token); // Store the token
+        const token  = response.data.token; 
+        localStorage.setItem("token", token); 
+        console.log(localStorage);
         setMessage("Login successful!");
         alert("Login successful!");
         navigate("/trip-booking"); 
@@ -97,7 +98,7 @@ function Loginpage() {
               placeholder="Password"
               {...register("password", { required: "Password is required" })}
             />
-            <botton onClick={() => setShow(!show)}>{show ? <FaEyeSlash/> : <FaEye/>}</botton>
+            <button onClick={() => setShow(!show)}>{show ? <FaEyeSlash/> : <FaEye/>}</button>
             {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
           </div>
           <div className="remember-forgot">

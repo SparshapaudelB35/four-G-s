@@ -1,7 +1,6 @@
 import  { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom';
 import "../css/tripbooking.css";
-import "../js/tripbooking.js";
 import Axios from 'axios';
 
 
@@ -10,7 +9,7 @@ function Tripbooking() {
  
   const handleTourBooking = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("authToken"); // Retrieve the token from localStorage
+    const token = localStorage.getItem("token"); 
   
     if (!token) {
       alert("You are not logged in. Please log in first.");
@@ -43,7 +42,7 @@ function Tripbooking() {
    
   const handleHotelBooking = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("authToken"); 
+    const token = localStorage.getItem("token"); 
   
     if (!token) {
       alert("You are not logged in. Please log in first.");
