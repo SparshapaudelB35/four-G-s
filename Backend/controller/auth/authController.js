@@ -1,5 +1,8 @@
+import bcrypt from "bcrypt";
 import { Users } from '../../model/index.js';
 import { generateToken } from "../../security/jwt-util.js";
+
+const saltRounds = 10;
 
 const login = async (req, res) => {
   try {
@@ -21,8 +24,8 @@ const login = async (req, res) => {
 
     console.log("User found:", user.toJSON());
 
-    // Compare passwords 
-    const isPasswordValid = password === user.password;
+    // Compare passwords using bcrypt
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
@@ -40,7 +43,6 @@ const login = async (req, res) => {
     res.status(500).json({ error: "Failed to login" });
   }
 };
-
 
 const create = async (req, res) => {
   try {
@@ -60,8 +62,11 @@ const create = async (req, res) => {
       return res.status(409).send({ message: "Email already exists" });
     }
 
+    // Hash the password before saving
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     // Create a new user in the database
-    const newUser = await Users.create({ name, email, password });
+    const newUser = await Users.create({ name, email, password: hashedPassword });
 
     // Generate a token for the newly created user
     const token = generateToken({ user: newUser.toJSON() });
@@ -72,7 +77,7 @@ const create = async (req, res) => {
       message: "User successfully registered",
     });
   } catch (error) {
-    console.error("Error in create function:", error.message); // Log the error
+    console.error("Error in create function:", error.message); 
     res.status(500).json({ error: "Failed to register user" });
   }
 };
