@@ -17,7 +17,7 @@ function TourCRUD() {
   const [records, setRecords] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
 
-  // Function to retrieve the token
+  
   const getAuthHeader = useCallback(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -28,11 +28,11 @@ function TourCRUD() {
     return { Authorization: `Bearer ${token}` };
   }, [navigate]);
 
-  // Fetch tours when the component mounts
+  
   useEffect(() => {
     const fetchTours = async () => {
       try {
-        const response = await Axios.get("http://localhost:4000/api/tours", {
+        const response = await Axios.get("http://localhost:4000/api/tour", {
           headers: getAuthHeader(),
         });
         setRecords(response.data.data);
@@ -48,13 +48,13 @@ function TourCRUD() {
     fetchTours();
   }, [navigate, getAuthHeader]);
 
-  // Handle input changes
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Validate form data
+  
   const validateFormData = () => {
     if (Object.values(formData).some(value => !value)) {
       alert('All fields must be filled!');
@@ -81,7 +81,7 @@ function TourCRUD() {
     return true;
   };
 
-  // Handle form submission (update tour)
+  
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (!validateFormData()) {
@@ -91,32 +91,33 @@ function TourCRUD() {
       if (editingIndex !== null) {
         const Id = records[editingIndex].tourId;
         const response = await Axios.put(
-          `http://localhost:4000/api/tours/${Id}`,
+          `http://localhost:4000/api/tour/${Id}`,
           formData,
           { headers: getAuthHeader() }
         );
-        if (response.data.success) {
+        if (response.status === 200) {
+          const updatedRecord = response.data.data;
           const newRecords = [...records];
-          newRecords[editingIndex] = response.data.data;
+          newRecords[editingIndex] = updatedRecord;
           setRecords(newRecords);
           resetForm();
+          alert("Record updated successfully!");
         }
       } else {
         alert("No record selected for editing.");
       }
     } catch (error) {
+      console.error("Error updating record:", error);
       if (error.response?.status === 401) {
         alert(error.response?.data?.message || "Unauthorized access");
         navigate('/login');
-      } else if (error.response?.status === 403) {
-        alert("You do not have permission to update this tour.");
       } else {
         alert(error.response?.data?.message || "An error occurred");
       }
     }
   };
 
-  // Reset the form
+  
   const resetForm = () => {
     setFormData({
       name: '',
@@ -130,7 +131,7 @@ function TourCRUD() {
     setEditingIndex(null);
   };
 
-  // Handle editing a record
+  
   const handleEdit = (index) => {
     const record = records[index];
     setFormData({
@@ -141,16 +142,16 @@ function TourCRUD() {
     setEditingIndex(index);
   };
 
-  // Handle deleting a record
+  
   const handleDelete = async (index) => {
     if (window.confirm('Are you sure you want to delete this record?')) {
       try {
         const tourId = records[index].tourId;
-        const response = await Axios.delete(`http://localhost:4000/api/tours/${tourId}`, {
+        const response = await Axios.delete(`http://localhost:4000/api/tour/${tourId}`, {
           headers: getAuthHeader(),
         });
   
-        if (response.data.success) {
+        if (response.status === 200) {
           setRecords(records.filter((_, i) => i !== index));
         } else {
           alert("Failed to delete tour");
@@ -159,8 +160,6 @@ function TourCRUD() {
         if (error.response?.status === 401) {
           alert("Unauthorized access. Please log in again.");
           navigate('/login');
-        } else if (error.response?.status === 403) {
-          alert("You do not have permission to delete this tour.");
         } else {
           alert(error.response?.data?.message || "An error occurred");
         }

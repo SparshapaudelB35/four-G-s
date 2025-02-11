@@ -5,7 +5,7 @@ dotenv.config();
 
 export function authenticateToken(req, res, next) {
 
-  const publicRoutes = ["/api/auth/create", "/api/auth/login", "/api/tours", "/api/hotel",'/api/auth/init', ];
+  const publicRoutes = ["/api/auth/create", "/api/auth/login", "/api/tour", "/api/hotel",'/api/auth/init','/api/auth/resetpassword' ];
 
   
   const path = req.path.split('?')[0];
@@ -30,7 +30,7 @@ export function authenticateToken(req, res, next) {
     return res.status(500).json({ message: "Internal server error." });
   }
 
-  // Verify the token
+  
   try {
     const decoded = jwt.verify(token, process.env.secretkey);
     req.user = decoded; 

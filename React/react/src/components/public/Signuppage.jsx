@@ -17,7 +17,6 @@ function Signuppage() {
 
   const onSubmit = async (data) => {
     try {
-      // POST request to save user data in the backend
       const response = await Axios.post("http://localhost:4000/api/auth/create", {
         name: data.fullname,
         email: data.email,
@@ -36,7 +35,6 @@ function Signuppage() {
       } else if (error.request) {
         setMessage("No response from server. Please try again later.");
       } else {
-        // Something went wrong in setting up the request
         setMessage("An unexpected error occurred. Please try again.");
       }
     }

@@ -78,7 +78,7 @@ const updateTour = async (req, res) => {
     res.status(200).json({ data: updatedTour, message: "Tour updated successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
+    res.status(500).json({ error: "Internal Server Error"});
   }
 };
 
@@ -95,7 +95,7 @@ const deleteTourById = async (req, res) => {
     res.status(200).json({ data: null, message: "Tour deleted successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
+    res.status(500).json({ error:"Internal Server Error"});
   }
 };
 

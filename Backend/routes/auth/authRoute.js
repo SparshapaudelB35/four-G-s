@@ -3,9 +3,10 @@ import { authController } from "../../controller/index.js";
 
 const router = express.Router();
 
-// Define routes
-router.post("/login", authController.login); // Login route
-router.post("/create", authController.create); // Signup route
-router.get("/init", authController.init); // Fetch current user
+
+router.post("/login", authController.login); 
+router.post("/create", authController.create); 
+router.get("/init", authController.init); 
+router.post("/resetpassword",authController.resetpassword);
 
 export { router as authRouter };

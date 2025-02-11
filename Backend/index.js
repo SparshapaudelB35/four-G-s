@@ -20,6 +20,7 @@ app.use(cors({
   origin: "http://localhost:5173", 
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],  
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json());
 
@@ -28,7 +29,8 @@ app.use((req, res, next) => {
   const publicRoutes = [
     '/api/auth/create', 
     '/api/auth/login',   
-    '/api/auth/init',   
+    '/api/auth/init', 
+    '/api/auth/resetpassword',  
   ];
 
   if (publicRoutes.includes(req.path)) {
@@ -41,7 +43,7 @@ app.use((req, res, next) => {
 
 
 app.use("/api/hotel",hotelRouter);
-app.use("/api/tours",tourRouter);
+app.use("/api/tour",tourRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 

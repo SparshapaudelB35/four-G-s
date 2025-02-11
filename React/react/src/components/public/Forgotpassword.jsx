@@ -1,7 +1,8 @@
 import 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 import '../css/forgotpassword.css';
+import Axios from 'axios';
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import  { useState } from 'react';
@@ -13,6 +14,10 @@ function Forgotpassword() {
   const [showpassword , setshowpassword] = useState(false);
     const [showretypepassword , setshowretypepassword] = useState(false);
 
+    const [message, setMessage] = useState('');
+
+  const navigate = useNavigate();
+
 
   const {
     register,
@@ -21,9 +26,29 @@ function Forgotpassword() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    alert(`Password Reset Request: ${JSON.stringify(data)}`);
+  const onSubmit = async (data) => {
+    try {
+      const response = await Axios.post("http://localhost:4000/api/auth/resetpassword", {
+        email: data.email,
+        newPassword: data.password,
+      });
+
+      if (response.status === 200) {
+        setMessage("Password successfully updated!");
+        alert("Password reset successful! Please log in.");
+        navigate("/login");
+      }
+    } catch (error) {
+      if (error.response) {
+        setMessage(`Error: ${error.response?.data?.message || "Please try again."}`);
+      } else {
+        setMessage("An unexpected error occurred.");
+      }
+    }
   };
+
+
+
 
   return (
     <div className="Container">
@@ -97,6 +122,7 @@ function Forgotpassword() {
           <button type="submit" className="btn">
             Reset Password
           </button>
+          {message && <p style={{ color: message.includes("Error") ? "red" : "green", margin: "10px" }}>{message}</p>}
         </form>
       </div>
     </div>
