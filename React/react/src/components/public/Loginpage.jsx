@@ -98,7 +98,7 @@ function Loginpage() {
               placeholder="Password"
               {...register("password", { required: "Password is required" })}
             />
-            <button onClick={() => setShow(!show)}>{show ? <FaEyeSlash/> : <FaEye/>}</button>
+            <botton onClick={() => setShow(!show)}>{show ? <FaEyeSlash/> : <FaEye/>}</botton>
             {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
           </div>
           <div className="remember-forgot">

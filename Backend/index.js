@@ -8,16 +8,18 @@ import { authRouter } from "./routes/index.js";
 import dotenv from "dotenv";
 import { authenticateToken } from "./middleware/token-middleware.js";
 
+
 dotenv.config();
 const app = express();
 
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 
 
 app.use(cors({
   origin: "http://localhost:5173", 
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],  
 }));
 app.use(express.json());
 
@@ -43,7 +45,7 @@ app.use("/api/tours",tourRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 
-app.options('/api/tours/:id', cors());
+
 
 
 app.listen(port, () => {
