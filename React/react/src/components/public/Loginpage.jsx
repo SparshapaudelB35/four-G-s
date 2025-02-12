@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
@@ -7,11 +7,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
 function Loginpage() {
-  const [show,setShow] = useState(false)
-  console.log(show)
-
-
-
+  const [show, setShow] = useState(false);
   const {
     register,
     handleSubmit,
@@ -23,22 +19,27 @@ function Loginpage() {
   const onSubmit = async (data) => {
     try {
       console.log("Sending login request with data:", data);
-  
-     
+
       const response = await Axios.post("http://localhost:4000/api/auth/login", {
         email: data.email,
         password: data.password,
       });
-  
+
       console.log("Response received:", response.data);
-  
+
       if (response.status === 200) {
-        const token  = response.data.token; 
+        const token = response.data.data?.access_token; 
+        if (!token) {
+          setMessage("Error: Token not found in response.");
+          console.error("Token not found in response:", response.data);
+          return;
+        }
+        console.log("Token received from server:", token); 
         localStorage.setItem("token", token); 
-        console.log(localStorage);
+        console.log("Token saved in localStorage:", localStorage.getItem("token")); 
         setMessage("Login successful!");
         alert("Login successful!");
-        navigate("/trip-booking"); 
+        navigate("/trip-booking");
       }
     } catch (error) {
       if (error.response) {
@@ -98,7 +99,7 @@ function Loginpage() {
               placeholder="Password"
               {...register("password", { required: "Password is required" })}
             />
-            <botton onClick={() => setShow(!show)}>{show ? <FaEyeSlash/> : <FaEye/>}</botton>
+            <button onClick={() => setShow(!show)}>{show ? <FaEyeSlash /> : <FaEye />}</button>
             {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
           </div>
           <div className="remember-forgot">

@@ -1,27 +1,59 @@
 import { Hotel } from "../../model/index.js";
 
-// Fetch all hotel bookings
+
 const getAllHotelBookings = async (req, res) => {
   try {
     const bookings = await Hotel.findAll();
+    if (!bookings.length) {
+      return res.status(404).json({ message: "No hotel bookings found" });
+    }
     res.status(200).json({ data: bookings, message: "Successfully fetched hotel bookings" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error while fetching hotel bookings" });
+    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
   }
 };
 
-// Create a new hotel booking
+
+const saveAllHotelBooking = async (req, res) => {
+  try {
+    const { bookingId } = req.body;
+    if (bookingId) {
+      return res.status(400).json({ message: "Booking ID should not be provided. It is auto-generated." });
+    }
+    await Hotel.create(req.body);
+    res.status(201).json({ message: "Hotel booking added successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
+  }
+};
+
+
 const createHotelBooking = async (req, res) => {
   try {
     const { name, contactNumber, hotelName, numberOfPeople, startDate, endDate, totalPrice } = req.body;
 
-    // Validate required fields
-    if (!name || !contactNumber || !hotelName || !numberOfPeople || !startDate || !endDate) {
+    
+    if (!name || !contactNumber || !hotelName || !numberOfPeople || !startDate || !endDate || !totalPrice) {
       return res.status(400).json({ message: "Missing required fields" });
     }
+    if (!/^\d+$/.test(contactNumber)) {
+      return res.status(400).json({ message: "Invalid contact number" });
+    }
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    if (isNaN(start.getTime()) || isNaN(end.getTime()) || start >= end) {
+      return res.status(400).json({ message: "Invalid date range" });
+    }
+    if (numberOfPeople <= 0 || !Number.isInteger(numberOfPeople)) {
+      return res.status(400).json({ message: "Number of people must be a positive integer" });
+    }
+    if (totalPrice < 0 || !Number.isFinite(totalPrice)) {
+      return res.status(400).json({ message: "Total price must be a positive number" });
+    }
 
-    // Create the hotel booking
+  
     const booking = await Hotel.create({
       name,
       contactNumber,
@@ -31,98 +63,67 @@ const createHotelBooking = async (req, res) => {
       endDate,
       totalPrice,
     });
-
     res.status(201).json({ data: booking, message: "Hotel booking created successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Failed to create hotel booking" });
+    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
   }
 };
 
-// Update an existing hotel booking
+
 const updateHotelBooking = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { bookingId } = req.params;
     const body = req.body;
 
-    // Find the booking by ID
-    const booking = await Hotel.findOne({ where: { bookingId: id } });
-    if (!booking) {
+    const [updatedRows] = await Hotel.update(body, { where: { bookingId: bookingId } });
+    if (!updatedRows) {
       return res.status(404).json({ message: "Hotel booking not found" });
     }
 
-    // Update the booking fields
-    Object.assign(booking, body);
-    await booking.save();
-
-    res.status(200).json({ data: booking, message: "Hotel booking updated successfully" });
+    const updatedBooking = await Hotel.findByPk(bookingId);
+    res.status(200).json({ data: updatedBooking, message: "Hotel booking updated successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Failed to update hotel booking" });
+    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
   }
 };
 
-// Delete a hotel booking by ID
+
 const deleteHotelBookingById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { bookingId } = req.params;
 
-    // Find the booking by ID
-    const booking = await Hotel.findOne({ where: { bookingId: id } });
+    const booking = await Hotel.findByPk(bookingId);
     if (!booking) {
       return res.status(404).json({ message: "Hotel booking not found" });
     }
 
-    // Delete the booking
     await booking.destroy();
-
     res.status(200).json({ message: "Hotel booking deleted successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Failed to delete hotel booking" });
+    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
   }
 };
 
-// Fetch a single hotel booking by ID
+
 const getHotelBookingById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { bookingId } = req.params;
 
-    // Find the booking by ID
-    const booking = await Hotel.findOne({ where: { bookingId: id } });
-    if (!booking) {
+    const booking = await Hotel.findByPk(bookingId);
+    if (!bookingId) {
       return res.status(404).json({ message: "Hotel booking not found" });
     }
 
     res.status(200).json({ data: booking, message: "Hotel booking fetched successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Failed to fetch hotel booking" });
+    res.status(500).json({ error: process.env.NODE_ENV === "production" ? "Internal Server Error" : error.message });
   }
 };
 
-// Save or create a hotel booking (if it doesn't already exist)
-const saveAllHotelBooking = async (req, res) => {
-  try {
-    const { bookingId } = req.body;
-
-    // Check if the booking already exists
-    const existingBooking = await Hotel.findOne({ where: { bookingId } });
-    if (existingBooking) {
-      return res.status(409).json({ message: "Hotel booking already exists" });
-    }
-
-    // Create the booking
-    await Hotel.create(req.body);
-
-    res.status(201).json({ message: "Hotel booking added successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to save hotel booking" });
-  }
-};
-
-// Export the controller methods
 export const hotelController = {
   getAllHotelBookings,
   createHotelBooking,

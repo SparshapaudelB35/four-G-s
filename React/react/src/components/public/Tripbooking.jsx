@@ -27,7 +27,7 @@ function Tripbooking() {
     };
   
     try {
-      const response = await Axios.post("http://localhost:4000/api/tours", tourData , {
+      const response = await Axios.post("http://localhost:4000/api/tour", tourData , {
         headers: {
           Authorization: `Bearer ${token}`, 
         },

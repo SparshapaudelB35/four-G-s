@@ -36,10 +36,6 @@ export const Hotel = sequelize.define("hotel", {
     type: DataTypes.FLOAT,
     allowNull: true, 
   },
-  isTripAlreadyBooked: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-  },
 });
 
 (async () => {

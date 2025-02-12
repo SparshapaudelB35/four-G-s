@@ -3,11 +3,11 @@ import { hotelController } from '../../controller/index.js';
 
 const router = express.Router();
 
-router.get('/hotels', hotelController.getAllHotelBookings); 
-router.post('/hotels', hotelController.saveAllHotelBooking); 
+router.get('/', hotelController.getAllHotelBookings); 
+router.post('/save', hotelController.saveAllHotelBooking); 
 router.post('/', hotelController.createHotelBooking); 
-router.put('/:id', hotelController.updateHotelBooking); 
-router.delete('/:id', hotelController.deleteHotelBookingById); 
-router.get('/:id', hotelController.getHotelBookingById); 
+router.put('/:bookingId', hotelController.updateHotelBooking); 
+router.delete('/:bookingId', hotelController.deleteHotelBookingById); 
+router.get('/:bookingId', hotelController.getHotelBookingById); 
 
 export {router as hotelRouter};
