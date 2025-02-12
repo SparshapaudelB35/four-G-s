@@ -1,9 +1,24 @@
-import React from 'react';
+import 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 import '../css/forgotpassword.css';
+import Axios from 'axios';
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import  { useState } from 'react';
+
+
 
 function Forgotpassword() {
+
+  const [showpassword , setshowpassword] = useState(false);
+    const [showretypepassword , setshowretypepassword] = useState(false);
+
+    const [message, setMessage] = useState('');
+
+  const navigate = useNavigate();
+
+
   const {
     register,
     handleSubmit,
@@ -11,9 +26,29 @@ function Forgotpassword() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    alert(`Password Reset Request: ${JSON.stringify(data)}`);
+  const onSubmit = async (data) => {
+    try {
+      const response = await Axios.post("http://localhost:4000/api/auth/resetpassword", {
+        email: data.email,
+        newPassword: data.password,
+      });
+
+      if (response.status === 200) {
+        setMessage("Password successfully updated!");
+        alert("Password reset successful! Please log in.");
+        navigate("/login");
+      }
+    } catch (error) {
+      if (error.response) {
+        setMessage(`Error: ${error.response?.data?.message || "Please try again."}`);
+      } else {
+        setMessage("An unexpected error occurred.");
+      }
+    }
   };
+
+
+
 
   return (
     <div className="Container">
@@ -33,6 +68,7 @@ function Forgotpassword() {
           
           <div>
             <input
+             id='email'
               type="email"
               placeholder="Email"
               {...register("email", {
@@ -50,7 +86,8 @@ function Forgotpassword() {
          
           <div>
             <input
-              type="password"
+              id='password'
+              type={showpassword ? 'text' : 'password'}
               placeholder="Password"
               {...register("password", {
                 required: "Password is required",
@@ -61,13 +98,15 @@ function Forgotpassword() {
               })}
               className="input"
             />
+            <botton onClick={() => setshowpassword(!showpassword)}>{showpassword ? <FaEyeSlash/> : <FaEye/>}</botton>
             {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
           </div>
 
          
           <div>
             <input
-              type="password"
+              id='password'
+              type={showretypepassword ? 'text' : 'password'}
               placeholder="Re-enter Password"
               {...register("confirmPassword", {
                 required: "Please confirm your password",
@@ -76,14 +115,14 @@ function Forgotpassword() {
               })}
               className="input"
             />
-            {errors.confirmPassword && (
-              <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>
-            )}
+            <botton onClick={() => setshowretypepassword(!showretypepassword)}>{showretypepassword ? <FaEyeSlash/> : <FaEye/>}</botton>
+            {errors.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>}
           </div>
 
           <button type="submit" className="btn">
             Reset Password
           </button>
+          {message && <p style={{ color: message.includes("Error") ? "red" : "green", margin: "10px" }}>{message}</p>}
         </form>
       </div>
     </div>

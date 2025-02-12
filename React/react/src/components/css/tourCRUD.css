@@ -8,6 +8,7 @@ html, body {
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+    
   }
 
   .container {
@@ -19,10 +20,10 @@ html, body {
   }  
 
   form {
-    width: 45%;
+    width: 40%;
     max-width: 600px;
     text-align: center;
-    margin: 25px;
+    margin: 5px;
     padding: 10px;
     backdrop-filter: blur(10px);
     background: rgba(0, 0, 0, 0.5);
@@ -33,7 +34,7 @@ html, body {
   form div {
     display: flex;
     flex-direction: column;
-    margin-bottom: 13px;
+    margin-bottom: 10px;
   }
   
   label {
@@ -70,40 +71,50 @@ html, body {
   }
   
   /* Table Styling */
-  table {
-    width: 94%;
+
+  .scroll-table {
+    width: 150%;
+    max-height: 600px;
+    overflow-y: auto;
+    border: 2px solid black;
+    margin: 8px;
    
-    margin: 25px 30px;
+  }
+  
+  table {    
     backdrop-filter: blur(8px);
     border-collapse: collapse;
-
-
   }
   
   table.list th {
     border: 2px solid black;
     padding: 10px 10px;
     color: white;
+    background-color: black;
+    position: sticky;
+    
   }
-  table.list td{
+  
+  table.list td {
     border: 2px solid black;
     padding: 10px 15px;
     color: black;
-  }
-  
-  table.list th {
-    background-color: black;
+    position: sticky;
+    
   }
   
   table.list tbody tr:nth-child(odd) {
     background-color: rgba(255, 255, 255, 0.1);
+    
+    
   }
   
   table.list tbody tr:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.3);
+    
+
   }
-  
- 
+   
   button {
     padding: 6px 12px;
     margin-right: 6px;
@@ -120,7 +131,7 @@ html, body {
     color: black;
   }
   
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 400px) {
     table {
       font-size: 14px;
     }
