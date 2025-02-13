@@ -153,6 +153,7 @@ function TourCRUD() {
   
         if (response.status === 200) {
           setRecords(records.filter((_, i) => i !== index));
+          alert("Record deleted Successfully!!");
         } else {
           alert("Failed to delete tour");
         }
