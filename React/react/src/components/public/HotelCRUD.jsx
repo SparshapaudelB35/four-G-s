@@ -208,7 +208,7 @@ function HotelCRUD() {
           />
         </div>
         <div>
-          <label>Place Name</label>
+          <label>Hotel Name</label>
           <input
             type="text"
             name="hotelName"

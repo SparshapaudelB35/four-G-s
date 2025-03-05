@@ -1,147 +1,157 @@
 html, body {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-image: url('/Image/tour3.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: white;
-  }
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-image: url('/Image/tour3.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  
+}
 
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 94%;
-    font-size: 13px;
-  }  
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 94%;
+  font-size: 13px;
+}  
 
-  form {
-    width: 45%;
-    max-width: 600px;
-    text-align: center;
-    margin: 25px;
-    padding: 10px;
-    backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  }
+form {
+  width: 40%;
+  max-width: 600px;
+  text-align: center;
+  margin: 5px;
+  padding: 10px;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"], input[type="number"], input[type="date"] {
+  width: 90%;
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background: black;
+  color: white;
+  font-size: 14px;
+}
+
+input[type="submit"], input[type="reset"] {
+  padding: 0.5em 1.7em;
+  width: 90%;
+  margin: 0.5em 0.2em;
+  border: 0.16em solid black;
+  background-color: white;
+  border-radius: 2em;
+  color: black;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover {
+  border: 0.16em solid white;
+  color: white;
+  background-color: black;
+}
+
+/* Table Styling */
+
+.scroll-table {
+  width: 150%;
+  max-height: 600px;
+  overflow-y: auto;
+  border: 2px solid black;
+  margin: 8px;
+ 
+}
+
+table {    
+  backdrop-filter: blur(8px);
+  border-collapse: collapse;
+}
+
+table.list th {
+  border: 2px solid black;
+  padding: 10px 10px;
+  color: white;
+  background-color: black;
+  position: sticky;
   
-  form div {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 13px;
-  }
+}
+
+table.list td {
+  border: 2px solid black;
+  padding: 10px 15px;
+  color: black;
+  position: sticky;
   
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
+}
+
+table.list tbody tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.1);
   
-  input[type="text"], input[type="number"], input[type="date"] {
-    width: 90%;
-    padding: 5px;
-    border: 2px solid black;
-    border-radius: 5px;
-    background: black;
-    color: white;
+  
+}
+
+table.list tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.3);
+  
+
+}
+ 
+button {
+  padding: 6px 12px;
+  margin-right: 6px;
+  background-color: black;
+  color: white;
+  margin: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}
+
+@media screen and (max-width: 400px) {
+  table {
     font-size: 14px;
   }
-  
-  input[type="submit"], input[type="reset"] {
-    padding: 0.5em 1.7em;
-    width: 90%;
-    margin: 0.5em 0.2em;
-    border: 0.16em solid black;
-    background-color: white;
-    border-radius: 2em;
-    color: black;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  
-  input[type="submit"]:hover, input[type="reset"]:hover {
-    border: 0.16em solid white;
-    color: white;
-    background-color: black;
-  }
-  
-  /* Table Styling */
-  table {
-    width: 94%;
-   
-    margin: 25px 30px;
-    backdrop-filter: blur(8px);
-    border-collapse: collapse;
 
-
-  }
-  
-  table.list th {
-    border: 2px solid black;
-    padding: 10px 10px;
-    color: white;
-  }
-  table.list td{
-    border: 2px solid black;
-    padding: 10px 15px;
-    color: black;
-  }
-  
-  table.list th {
-    background-color: black;
-  }
-  
-  table.list tbody tr:nth-child(odd) {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  table.list tbody tr:nth-child(even) {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  
- 
-  button {
-    width: 100px;
-    padding: 6px 12px;
-    background-color: black;
-    color: white;
-    margin: 17px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: white;
-    color: black;
-  }
-  
-  @media screen and (max-width: 500px) {
-    table {
-      font-size: 14px;
-    }
-  
-    form {
-      padding: 10px;
-    }
-  
-    input[type="text"], input[type="number"], input[type="date"] {
-      width: 100%;
-    }
+  form {
+    padding: 10px;
   }
 
-  .logout img {
-    margin-top: 600px;
-    height: 40px;
-    width: auto;
-    cursor: pointer;
-    border-radius: 50%;
+  input[type="text"], input[type="number"], input[type="date"] {
+    width: 100%;
+  }
+}
+
+.logout img {
+  margin-top: 600px;
+  height: 40px;
+  width: auto;
+  cursor: pointer;
+  border-radius: 50%;
 }
 
 
-  
-  
+

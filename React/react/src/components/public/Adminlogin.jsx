@@ -23,18 +23,27 @@ function Adminlogin() {
     const onSubmit = async (data) => {
       try {
         console.log("Sending login request with data:", data);
-    
+  
         const response = await Axios.post("http://localhost:4000/api/auth/login", {
           email: data.email,
           password: data.password,
         });
-    
+  
         console.log("Response received:", response.data);
-    
+  
         if (response.status === 200) {
+          const token = response.data.data?.access_token; 
+          if (!token) {
+            setMessage("Error: Token not found in response.");
+            console.error("Token not found in response:", response.data);
+            return;
+          }
+          console.log("Token received from server:", token); 
+          localStorage.setItem("token", token); 
+          console.log("Token saved in localStorage:", localStorage.getItem("token")); 
           setMessage("Login successful!");
           alert("Login successful!");
-          navigate("/adminhotelcrud"); 
+          navigate("/admintourcrud");
         }
       } catch (error) {
         if (error.response) {
