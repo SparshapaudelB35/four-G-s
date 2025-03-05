@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family:'Times New Roman', Times, serif
+}
+.Container{
+    width: 100%;
+    height: 100vh;
+}
+
+.Container img {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    filter: brightness(0.7);      
+
+} 
+
+.Header {
+    position: fixed;
+    display: flex;
+    width: 96%;
+    margin-top: 30px;
+    justify-content: flex-end;
+}
+
+.imagecontainer {
+    display: flex;
+    position: absolute;
+    margin-right: 1160px;
+    gap: 10px;
+}
+
+.imagecontainer img {
+    height: 75px;
+    width: auto;
+    cursor: pointer;
+}
+
+.imagecontainer h1 {
+    margin-right: 400px;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.home img {
+    margin-top: 10px;
+    padding-right: 50px;
+    height: 40px;
+    width: auto;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.Form {
+    height: 320px;
+    width: 390px;
+    backdrop-filter: blur(2px);
+    border-radius: 20px;
+    border: 2px solid black;
+    text-align: center;
+    position: absolute;
+    top: 28%;
+    left: 35%;
+}
+
+.Form:hover {
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2),
+        -5px -5px 10px rgba(255, 255, 255, 0.8);
+}
+.Form h1{
+    color: black;
+    font-size: 40px;
+    padding: 20px;
+}
+
+input[type="email"] {
+    width: 290px;
+    padding: 14px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background: white;
+    color: black;
+    font-size: 14px;
+    align-items:end;
+    margin-left: 8px;
+    margin-top: 15px;
+  }
+
+ #password {
+    width: 290px;
+    padding: 14px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background: white;
+    color: black;
+    font-size: 14px;
+    align-items:end;
+    margin-left: 25px;
+    margin-top: 25px;
+  }
+
+  
+
+.Form .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    color: white;
+}
+
+.remember-forgot a {
+    text-decoration: none;
+    color: white;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    width: 40%;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    font-size: 15px;
+    font-weight: 600;
+    align-items: center;
+    margin-top: 30px;
+}
+.btn:hover {
+    border: 0.16em solid white;
+    color: white;
+    background-color: black;
+}
+
+
